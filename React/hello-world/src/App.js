@@ -22,11 +22,13 @@ import Table from './components/Table.js';
 import PureComp from './components/PureComp.js';
 import RegComp from './components/RegComp.js';
 import ParentComp from './components/ParentComp.js';
+import RefsDemo from './components/RefsDemo.js';
 
 function App() {
   return (
     <div className="App">
-      <ParentComp/>
+      <RefsDemo />
+      {/*<ParentComp/>*/}
       {/*<Table/>*/}
       {/*<FragmentDemo />*/}
       {/*<LifecycleA/>*/}
