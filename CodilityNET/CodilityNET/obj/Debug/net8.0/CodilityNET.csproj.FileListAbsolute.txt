@@ -1,0 +1,15 @@
+C:\Jed\dev\Exercises\CodilityNET\CodilityNET\obj\Debug\net8.0\CodilityNET.GeneratedMSBuildEditorConfig.editorconfig
+C:\Jed\dev\Exercises\CodilityNET\CodilityNET\obj\Debug\net8.0\CodilityNET.AssemblyInfoInputs.cache
+C:\Jed\dev\Exercises\CodilityNET\CodilityNET\obj\Debug\net8.0\CodilityNET.AssemblyInfo.cs
+C:\Jed\dev\Exercises\CodilityNET\CodilityNET\obj\Debug\net8.0\CodilityNET.csproj.CoreCompileInputs.cache
+C:\Jed\dev\Exercises\CodilityNET\CodilityNET\obj\Debug\net8.0\CodilityNET.sourcelink.json
+C:\Jed\dev\Exercises\CodilityNET\CodilityNET\bin\Debug\net8.0\CodilityNET.exe
+C:\Jed\dev\Exercises\CodilityNET\CodilityNET\bin\Debug\net8.0\CodilityNET.deps.json
+C:\Jed\dev\Exercises\CodilityNET\CodilityNET\bin\Debug\net8.0\CodilityNET.runtimeconfig.json
+C:\Jed\dev\Exercises\CodilityNET\CodilityNET\bin\Debug\net8.0\CodilityNET.dll
+C:\Jed\dev\Exercises\CodilityNET\CodilityNET\bin\Debug\net8.0\CodilityNET.pdb
+C:\Jed\dev\Exercises\CodilityNET\CodilityNET\obj\Debug\net8.0\CodilityNET.dll
+C:\Jed\dev\Exercises\CodilityNET\CodilityNET\obj\Debug\net8.0\refint\CodilityNET.dll
+C:\Jed\dev\Exercises\CodilityNET\CodilityNET\obj\Debug\net8.0\CodilityNET.pdb
+C:\Jed\dev\Exercises\CodilityNET\CodilityNET\obj\Debug\net8.0\CodilityNET.genruntimeconfig.cache
+C:\Jed\dev\Exercises\CodilityNET\CodilityNET\obj\Debug\net8.0\ref\CodilityNET.dll
