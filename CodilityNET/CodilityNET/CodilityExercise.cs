@@ -79,13 +79,13 @@ namespace CodilityNET
 
             for(int i= 0; i < A.Length; i++)
             {
-                if (!set.Contains(A[i]))
+                if (set.Contains(A[i]))
                 {
-                    set.Add(A[i]);
+                    set.Remove(A[i]);
                 }
                 else
                 {
-                    set.Remove(A[i]);
+                    set.Add(A[i]);
                 }
             }
 
