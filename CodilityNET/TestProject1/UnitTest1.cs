@@ -53,6 +53,7 @@ namespace TestProject1
         [InlineData(new int[] { 3, 8, 9, 7, 6}, 3, new int[] { 9, 7, 6, 3, 8})]
         [InlineData(new int[] { 0, 0, 0}, 1, new int[] { 0, 0, 0})]
         [InlineData(new int[] { 1, 2, 3, 4}, 4, new int[] { 1, 2, 3, 4})]
+        [InlineData(new int[] { }, 5, new int[] { })]
         public void CyclicRotation_Test(int[] input, int rotationCount, int[] expectedResult)
         {
             int[] result = _exercise.CyclicRotation(input, rotationCount);

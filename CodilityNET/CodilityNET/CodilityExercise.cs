@@ -40,6 +40,8 @@ namespace CodilityNET
 
         public int[] CyclicRotation(int[] A, int K)
         {
+            if (A.Length == 0)
+                return A;
             int counter = 0;
             while(counter < K)
             {
