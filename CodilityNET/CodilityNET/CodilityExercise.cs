@@ -37,5 +37,29 @@ namespace CodilityNET
 
             return longestGap;
         }
+
+        public int[] CyclicRotation(int[] A, int K)
+        {
+            int counter = 0;
+            while(counter < K)
+            {
+                A = RotateOnce(A);
+                counter++;
+            }
+
+            return A;
+        }
+
+        private int[] RotateOnce(int[] A)
+        {
+            int holder = A[A.Length - 1];
+            for (int i = A.Length - 2; i >= 0; i--)
+            {
+                A[i + 1] = A[i];
+            }
+            A[0] = holder;
+
+            return A;
+        }
     }
 }
