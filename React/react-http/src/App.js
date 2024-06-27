@@ -1,11 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
 import PostList from './components/PostList.js';
+import PostForm from './components/PostForm.js';
 
 function App() {
   return (
     <div className="App">
-      <PostList />
+      {/*<PostList />*/}
+      <PostForm/>
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
