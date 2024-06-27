@@ -26,11 +26,26 @@ import RefsDemo from './components/RefsDemo.js';
 import FocusInput from './components/FocusInput.js';
 import FRParentInput from './components/FRParentInput.js';
 import PortalDemo from './components/PortalDemo.js';
+import Hero from './components/Hero.js';
+import ErrorBoundary from './components/ErrorBoundary.js';
+import ClickCounter from './components/ClickCounter.js';
+import HoverCounter from './components/HoverCounter.js';
 
 function App() {
   return (
     <div className="App">
-      <PortalDemo />
+      <ClickCounter />
+      <HoverCounter />
+      {/*<ErrorBoundary>
+        <Hero heroName="Batman"/>
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <Hero heroName="Superman"/>
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <Hero heroName="Joker"/>
+      </ErrorBoundary>*/}
+      {/*<PortalDemo />*/}
       {/*<FRParentInput />*/}
       {/*<FocusInput />*/}
       {/*<RefsDemo />*/}
