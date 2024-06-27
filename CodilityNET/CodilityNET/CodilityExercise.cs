@@ -94,5 +94,20 @@ namespace CodilityNET
 
         #endregion
 
+        #region FrogJump
+
+        public int FrogJump(int X, int Y, int D)
+        {
+            int distanceBetween = Y - X;
+            int remainder = distanceBetween % D;
+
+            if (remainder == 0)
+                return distanceBetween / D;
+            else
+                return (distanceBetween / D) + 1;
+            
+        }
+
+        #endregion
     }
 }

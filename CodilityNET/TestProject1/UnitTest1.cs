@@ -75,5 +75,16 @@ namespace TestProject1
 
             Assert.Equal(expectedResult, result);
         }
+
+        [Theory]
+        [InlineData(10, 85, 30, 3)]
+        [InlineData(1, 100, 4, 25)]
+        [InlineData(10, 20, 100, 1)]
+        public void FrogJump_Test(int start, int end, int jumpDistance, int expectedResult)
+        {
+            int result = _exercise.FrogJump(start, end, jumpDistance);
+
+            Assert.Equal(expectedResult, result);
+        }
     }
 }
