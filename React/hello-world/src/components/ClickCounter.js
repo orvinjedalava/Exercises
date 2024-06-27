@@ -15,15 +15,15 @@ class ClickCounter extends Component {
     }
 
     render() {
-        const { count } = this.props;
+        const { count, name } = this.props;
         return (
             <div>
                 <button onClick={this.handleClick}>
-                    Clicked {count} times
+                    {name} Clicked {count} times
                 </button>
             </div>
         );
     }
 }
 
-export default withCounter(ClickCounter);
+export default withCounter(ClickCounter, 5);
