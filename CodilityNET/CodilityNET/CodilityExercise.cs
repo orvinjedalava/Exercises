@@ -8,6 +8,7 @@ namespace CodilityNET
 {
     public class CodilityExercise
     {
+        #region BinaryGap
         public int BinaryGap(int n)
         {
             string binary = HelperService.FromBaseToBase(n.ToString(), 10, 2);
@@ -38,6 +39,10 @@ namespace CodilityNET
             return longestGap;
         }
 
+        #endregion
+
+        #region CyclicRotation
+
         public int[] CyclicRotation(int[] A, int K)
         {
             if (A.Length == 0)
@@ -63,5 +68,31 @@ namespace CodilityNET
 
             return A;
         }
+
+        #endregion
+
+        #region OddOccurencesInArray
+
+        public int OddOccurencesInArray(int[] A)
+        {
+            HashSet<int> set = new HashSet<int>();
+
+            for(int i= 0; i < A.Length; i++)
+            {
+                if (!set.Contains(A[i]))
+                {
+                    set.Add(A[i]);
+                }
+                else
+                {
+                    set.Remove(A[i]);
+                }
+            }
+
+            return set.FirstOrDefault();
+        }
+
+        #endregion
+
     }
 }

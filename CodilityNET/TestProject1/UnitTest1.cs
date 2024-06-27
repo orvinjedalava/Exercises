@@ -63,5 +63,17 @@ namespace TestProject1
                 Assert.Equal(expectedResult[i], result[i]);
             }
         }
+
+        [Theory]
+        [InlineData(new int[] { 9, 3, 9, 3, 9, 7, 9}, 7)]
+        [InlineData(new int[] { 1 }, 1)]
+        [InlineData(new int[] { 5, 2, 2, 2, 2 }, 5)]
+        [InlineData(new int[] { 6, 2, 4, 4, 6 }, 2)]
+        public void OddOccurencesInArray_Test(int[] input, int expectedResult)
+        {
+            int result = _exercise.OddOccurencesInArray(input);
+
+            Assert.Equal(expectedResult, result);
+        }
     }
 }
