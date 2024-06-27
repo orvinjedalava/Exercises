@@ -24,11 +24,13 @@ import RegComp from './components/RegComp.js';
 import ParentComp from './components/ParentComp.js';
 import RefsDemo from './components/RefsDemo.js';
 import FocusInput from './components/FocusInput.js';
+import FRParentInput from './components/FRParentInput.js';
 
 function App() {
   return (
     <div className="App">
-      <FocusInput />
+      <FRParentInput />
+      {/*<FocusInput />*/}
       {/*<RefsDemo />*/}
       {/*<ParentComp/>*/}
       {/*<Table/>*/}
