@@ -154,5 +154,15 @@ namespace TestProject1
 
             Assert.Equal(expectedResult, result);
         }
+
+        [Theory]
+        [InlineData(new int[] { 1, 5, 2, 1, 4, 0 }, 11)]
+        public void NumberOfDiscIntersections_Test(int[] input, int expectedResult)
+        {
+            int result = _exercise.NumberOfDiscIntersections(input);
+
+            Assert.Equal(expectedResult, result);
+        }
+
     }
 }

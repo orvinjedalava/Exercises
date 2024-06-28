@@ -304,5 +304,37 @@ namespace CodilityNET
         }
 
         #endregion
+
+        #region NumberOfDiscIntersections
+
+        public int NumberOfDiscIntersections(int[] A)
+        {
+            int result = 0;
+            for (int i = 0; i < A.Length - 1; i++)
+            {
+                decimal iStart = i - A[i];
+                decimal iEnd = i + A[i];
+
+                for(int j = i+1; j < A.Length; j++)
+                {
+                    decimal jStart = j - A[j];
+                    decimal jEnd = j + A[j];
+
+                    if ( 
+                        ( jStart <= iStart && iStart <= jEnd )
+                        || ( jStart <= iEnd && iEnd <= jEnd ) 
+                        || ( iStart <= jStart && jStart <= iEnd)
+                        || ( iStart <= jEnd && jEnd <= iEnd))
+                    {
+                        result++;
+                        continue;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        #endregion
     }
 }
