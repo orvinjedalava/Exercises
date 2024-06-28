@@ -187,5 +187,17 @@ namespace TestProject1
             
             Assert.Equal(expectedResult, result);
         }
+
+        [Theory]
+        [InlineData(new int[] { 1, 1, 1 }, 2)]
+        [InlineData(new int[] { 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0 }, 3)]
+        [InlineData(new int[] { 0, 0, 0, 0, 0, 1, 1  }, 1)]
+        [InlineData(new int[] { 0, 0, 0, 0, 0, 1 }, -1)]
+        public void FibFrog_Test(int[] input, int expectedResult)
+        {
+            int result = _exercise.FibFrog(input);
+
+            Assert.Equal(expectedResult, result);
+        }
     }
 }

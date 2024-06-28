@@ -407,5 +407,85 @@ namespace CodilityNET
         }
 
         #endregion
+
+        #region FibFrog
+
+        public int FibFrog(int[] A)
+        {
+            int totalSteps = A.Length  + 1;
+            List<Fibonacci> fibVals = GenerateFib(100);
+            int cursorIndex = A.Length - 1;
+            int destinationIndex = A.Length;
+            Fibonacci? fib = null;
+            int jumps = 0;
+            int currentIndex = -1;
+
+            while (totalSteps > 0)
+            {
+                fib = fibVals.Find(x => x.Value == totalSteps);
+                if (fib != null)
+                {
+                    jumps++;
+                    return jumps;
+                }    
+
+                if (A[cursorIndex] == 1 && fibVals.Find(x => x.Value == cursorIndex - currentIndex) != null)
+                {
+                    totalSteps -= cursorIndex - currentIndex;
+                    currentIndex = cursorIndex;
+                    jumps++;
+                    cursorIndex = A.Length - 1;
+                }
+                else
+                {
+                    cursorIndex--;
+                    if (cursorIndex < 0 || currentIndex == cursorIndex)
+                        return -1;
+                }
+            }
+
+            return -1;
+        }
+
+        public class Fibonacci
+        {
+            public int Value { get; private set; }
+            public Fibonacci(int value)
+            {
+                Value = value;
+            }
+        }
+
+        public List<Fibonacci> GenerateFib(int max)
+        {
+            int index = 0;
+            List<Fibonacci> result = new List<Fibonacci>();
+            int[] temp = new int[max + 1];
+            
+            while(index <= max)
+            {
+                if (index == 0)
+                {
+                    temp[index] = 0;
+                    result.Add(new Fibonacci(0));
+                }
+                if (index == 1)
+                {
+                    temp[index] = 1;
+                    result.Add(new Fibonacci(1));
+                }
+                if (index >= 2)
+                {
+                    temp[index] = temp[index - 1] + temp[index - 2];
+                    result.Add(new Fibonacci(temp[index]));
+                }
+                
+                index++;
+            }
+
+            return result.ToList();
+        }
+
+        #endregion
     }
 }
