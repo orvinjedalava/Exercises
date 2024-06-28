@@ -143,5 +143,16 @@ namespace TestProject1
                 Assert.Equal(expectedResult[i], result[i]);
             }
         }
+
+        [Theory]
+        [InlineData(new int[] { 1, 3, 6, 4, 1, 2 }, 5)]
+        [InlineData(new int[] { 1, 2, 3 }, 4)]
+        [InlineData(new int[] { -1, -3 }, 1)]
+        public void MissingInteger_Test(int[] input, int expectedResult)
+        {
+            int result = _exercise.MissingInteger(input);
+
+            Assert.Equal(expectedResult, result);
+        }
     }
 }

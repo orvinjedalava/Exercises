@@ -278,5 +278,31 @@ namespace CodilityNET
         }
 
         #endregion
+
+        #region MissingInteger
+
+        public int MissingInteger(int[] A)
+        {
+            int limit = 100000;
+            bool[] nums = new bool[limit+2];
+
+            for (int j = 0; j < A.Length; j++)
+            {
+                int index = A[j];
+                if (index < 0 || index > limit)
+                    continue;
+                nums[index] = true;
+            }
+            
+            for(int k = 1; k <= limit+1; k++)
+            {
+                if (!nums[k])
+                    return k;
+            }
+
+            return 1;
+        }
+
+        #endregion
     }
 }
