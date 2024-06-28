@@ -225,5 +225,58 @@ namespace CodilityNET
         }
 
         #endregion
+
+        #region MaxCounters
+
+        public int[] MaxCounters(int N, int[] A)
+        {
+            Dictionary<int, int> map = new Dictionary<int, int>();
+
+            int key = 1;
+            while(key <= N)
+            {
+                map.Add(key, 0);
+                key++;
+            }
+
+            int maxValueBomb = 0;
+            int maxValue = 0;
+
+            for (int i = 0; i < A.Length; i++)
+            {
+                if (A[i] == N + 1)
+                {
+                    maxValueBomb = maxValue;
+                    continue;
+                }
+
+                int currentCounter = A[i];
+
+                if (map[currentCounter] < maxValueBomb)
+                    map[currentCounter] = maxValueBomb;
+
+                map[currentCounter]++;
+
+                if (map[currentCounter] > maxValue)
+                    maxValue = map[currentCounter];
+            }
+
+            int[] result = new int[N];
+            int index = 0;
+
+            foreach(var item in map)
+            {
+                if (item.Value < maxValueBomb)
+                    result[index] = maxValueBomb;
+                else
+                    result[index] = item.Value;
+
+                index++;
+            }
+
+            return result;
+        }
+
+        #endregion
     }
 }

@@ -131,5 +131,17 @@ namespace TestProject1
 
             Assert.Equal(expectedResult, result);
         }
+
+        [Theory]
+        [InlineData(new int[] { 3, 4, 4, 6, 1, 4, 4 }, 5, new int[] { 3, 2, 2, 4, 2 })]
+        public void MaxCounters_Test(int[] input, int counters, int[] expectedResult)
+        {
+            int[] result = _exercise.MaxCounters(counters, input);
+
+            for (int i = 0; i < result.Length; i++)
+            {
+                Assert.Equal(expectedResult[i], result[i]);
+            }
+        }
     }
 }
