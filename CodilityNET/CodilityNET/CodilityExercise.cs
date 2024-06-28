@@ -109,5 +109,32 @@ namespace CodilityNET
         }
 
         #endregion
+
+        #region PermMissingElem
+
+        public int PermMissingElem(int[] A)
+        {
+            if (A.Length == 0)
+                return 1;
+
+            Array.Sort(A);
+
+            if (A[0] != 1)
+                return 1;
+
+            int counter = 0;
+            int expected = 1;
+            while (counter < A.Length - 1)
+            {
+                expected = A[counter] + 1;
+                if (expected != A[counter + 1])
+                    return expected;
+                counter++;
+            }
+
+            return expected + 1;
+        }
+
+        #endregion
     }
 }

@@ -86,5 +86,18 @@ namespace TestProject1
 
             Assert.Equal(expectedResult, result);
         }
+
+        [Theory]
+        [InlineData(new int[] { 2, 3, 1, 5}, 4)]
+        [InlineData(new int[] { 10,7,3,4,6,5,2,8,1 }, 9)]
+        [InlineData(new int[] { }, 1)]
+        [InlineData(new int[] { 2 }, 1)]
+        [InlineData(new int[] { 1, 2, 3 }, 4)]
+        public void PermMissingElem_Test(int[] input, int expectedResult)
+        {
+            int result = _exercise.PermMissingElem(input);
+
+            Assert.Equal(expectedResult, result);
+        }
     }
 }
