@@ -99,5 +99,15 @@ namespace TestProject1
 
             Assert.Equal(expectedResult, result);
         }
+        [Theory]
+        [InlineData(new int[] { 5,3}, 2)]
+        [InlineData(new int[] { 3, 1, 2, 4, 3}, 1)]
+        [InlineData(new int[] { 6, 2, 2 }, 2)]
+        public void TapeEquilibrium_Test(int[] input, int expectedResult)
+        {
+            int result = _exercise.TapeEquilibrium(input);
+
+            Assert.Equal(expectedResult, result);
+        }
     }
 }

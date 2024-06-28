@@ -136,5 +136,28 @@ namespace CodilityNET
         }
 
         #endregion
+
+        #region TapeEquilibrium
+
+        public int TapeEquilibrium(int[] A)
+        {
+            int leftSum = A[0];
+            int rightSum = A.Sum() - A[0];
+            int minDiff = Math.Abs(leftSum - rightSum);
+            
+            for(int i = 1; i < A.Length - 1; i++)
+            {
+                leftSum += A[i];
+                rightSum -= A[i];
+
+                int diff = Math.Abs(leftSum - rightSum);
+                if (minDiff > diff)
+                    minDiff = diff;
+            }
+            
+            return minDiff;
+        }
+
+        #endregion
     }
 }
