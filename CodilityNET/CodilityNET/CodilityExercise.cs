@@ -384,5 +384,30 @@ namespace CodilityNET
         }
 
         #endregion
+
+        #region GenomicRangeQuery
+
+        public int MinAbsSumOfTwo(int[] A)
+        {
+            int tail = 0;
+            int head = A.Length - 1;
+            Array.Sort(A);
+            int minSum = int.MaxValue;
+            while(tail <= head)
+            {
+                int sum = A[tail] + A[head];
+                minSum = Math.Min(minSum, Math.Abs(sum));
+
+                if (sum <= 0)
+                    tail++;
+                else
+                    head--;
+            }
+                
+
+            return minSum;
+        }
+
+        #endregion
     }
 }

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CodilityNET")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1a77e2b4b5d5471f43ef4f4773d4fec5a993e069")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6237dc4449bc2a3ca990f3b0b7792344b7b517cf")]
 [assembly: System.Reflection.AssemblyProductAttribute("CodilityNET")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CodilityNET")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

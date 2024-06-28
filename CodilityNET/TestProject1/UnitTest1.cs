@@ -174,5 +174,18 @@ namespace TestProject1
             Assert.Equal(expectedResult, result);
         }
 
+        [Theory]
+        [InlineData(new int[] { 1, 4, -3 }, 1)]
+        [InlineData(new int[] { -8, 4, 5, -10, 3}, 3)]
+        [InlineData(new int[] { 6 }, 12)]
+        [InlineData(new int[] { 8, 5, 3, 4, 6, 8 }, 6)]
+        [InlineData(new int[] { 3, 4, 5, 6, 8, 8 }, 6)]
+
+        public void MinAbsSumOfTwo_Test(int[] input, int expectedResult)
+        {
+            int result = _exercise.MinAbsSumOfTwo(input);
+            
+            Assert.Equal(expectedResult, result);
+        }
     }
 }
