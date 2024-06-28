@@ -164,5 +164,15 @@ namespace TestProject1
             Assert.Equal(expectedResult, result);
         }
 
+        [Theory]
+        [InlineData(6,11,2,3)]
+        [InlineData(6, 12, 2, 4)]
+        public void CountDiv_Test(int a, int b, int k, int expectedResult)
+        {
+            int result = _exercise.CountDiv(a, b, k);
+
+            Assert.Equal(expectedResult, result);
+        }
+
     }
 }

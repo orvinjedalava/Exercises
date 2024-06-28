@@ -336,5 +336,53 @@ namespace CodilityNET
         }
 
         #endregion
+
+        #region CountDiv
+
+        public int CountDiv(int A, int B, int K)
+        {
+            int lowerBound = int.MinValue;
+            int higherBound = int.MinValue;
+
+            if (A == B )
+            {
+                if (A % K == 0)
+                    return 1;
+                else 
+                    return 0;
+            }
+
+
+            int current = A;
+            while(current <= B)
+            {
+                if ( current % K == 0)
+                {
+                    lowerBound = current;
+                    break;
+                }
+                current++;
+            }
+
+            current = B;
+            while(current >= A)
+            {
+                if (current % K == 0)
+                {
+                    higherBound = current;
+                    break;
+                }
+                current--;
+            }
+
+            if (lowerBound == int.MinValue && higherBound == int.MinValue)
+                return 0;
+            if (lowerBound == int.MinValue || higherBound == int.MinValue)
+                return 1;
+
+            return (higherBound - lowerBound) / K + 1;
+        }
+
+        #endregion
     }
 }
