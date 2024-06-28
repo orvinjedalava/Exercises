@@ -159,5 +159,41 @@ namespace CodilityNET
         }
 
         #endregion
+
+        #region FrogRiverOne
+
+        public int FrogRiverOne(int X, int[] A)
+        {
+            int result = -1;
+            if (X == 0)
+                return 0;
+            if (X < 0)
+                return -1;
+
+            HashSet<int> set = new HashSet<int>();
+            int steps = X;
+            
+            while(steps >= 1)
+            {
+                set.Add(steps);
+                steps--;
+            }
+
+            for(int i = 0; i < A.Length; i++)
+            {
+                if (set.Contains(A[i]))
+                    set.Remove(A[i]);
+
+                if (set.Count == 0)
+                {
+                    result = i;
+                    break;
+                }
+            }
+
+            return result;
+        }
+
+        #endregion
     }
 }

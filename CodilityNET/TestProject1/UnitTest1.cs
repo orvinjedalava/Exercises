@@ -109,5 +109,16 @@ namespace TestProject1
 
             Assert.Equal(expectedResult, result);
         }
+
+        [Theory]
+        [InlineData(new int[] { 3, 5, 3, 10, 11, 2, 1, 1,  }, 3,  6)]
+        [InlineData(new int[] { 3, 1, 2, 4, 3 }, 10, -1)]
+        [InlineData(new int[] { 1, 3, 1, 4, 2, 3, 5, 4 }, 5, 6)]
+        public void FrogRiverOne_Test(int[] input, int destination, int expectedResult)
+        {
+            int result = _exercise.FrogRiverOne(destination, input);
+
+            Assert.Equal(expectedResult, result);
+        }
     }
 }
