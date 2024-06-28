@@ -385,7 +385,7 @@ namespace CodilityNET
 
         #endregion
 
-        #region GenomicRangeQuery
+        #region MinAbsSumOfTwo
 
         public int MinAbsSumOfTwo(int[] A)
         {
@@ -403,8 +403,6 @@ namespace CodilityNET
                 else
                     head--;
             }
-                
-
             return minSum;
         }
 
