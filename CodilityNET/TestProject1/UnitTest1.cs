@@ -199,5 +199,27 @@ namespace TestProject1
 
             Assert.Equal(expectedResult, result);
         }
+
+        [Theory]
+        [InlineData(new int[] { 1, 2, 3, 4, 3, 4, 1, 2, 3, 4, 6, 2 }, 3)]
+        //[InlineData(new int[] { 0, 1, 0, 0, 1, 0, 0, 1, 0 }, 3)]
+        public void Peaks_Test(int[] input, int expectedResult)
+        {
+            int result = _exercise.Peaks(input);
+
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Theory]
+        [InlineData("{[()()]}", 1)]
+        [InlineData("([)()]", 0)]
+        [InlineData(")(", 0)]
+        //[InlineData(new int[] { 0, 1, 0, 0, 1, 0, 0, 1, 0 }, 3)]
+        public void Brackets_Test(string input, int expectedResult)
+        {
+            int result = _exercise.Brackets(input);
+
+            Assert.Equal(expectedResult, result);
+        }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CodilityNET
 {
@@ -484,6 +485,132 @@ namespace CodilityNET
             }
 
             return result.ToList();
+        }
+
+        #endregion
+
+        #region Peaks
+
+        public int Peaks(int[] A)
+        {
+            if (A.Length <= 2)
+                return 0;
+
+            List<int> peaks = new List<int>();
+            for(int i = 1; i < A.Length - 1; i++)
+            {
+                if (A[i - 1] < A[i] && A[i] > A[i + 1])
+                    peaks.Add(i);
+            }
+            if (peaks.Count <= 1)
+                return peaks.Count;
+
+            int result = 1;
+
+            for (int i = 2; i <= A.Length / 2; i += 2)
+            {
+                if (A.Length % i == 0)
+                {
+                    if (AllBlocksHavePeaks(i, A.Length, peaks))
+                        result++;
+                }
+            }
+
+            int squareRoot = (int)Math.Floor(Math.Sqrt(A.Length));
+
+            for (int i = 3; i <= squareRoot; i += 2)
+            {
+                if (A.Length % i == 0)
+                {
+                    if (AllBlocksHavePeaks(i, A.Length, peaks))
+                        result++;
+                }
+            }
+
+            return result;
+        }
+
+        private bool AllBlocksHavePeaks(int divisor, int length, List<int> peaks)
+        {
+            HashSet<int> peaksUsed = new HashSet<int>();
+
+            for (int j = 0; j < length; j = j + divisor)
+            {
+                int start = j;
+                int end = j + divisor - 1;
+                int peak = peaks.Find(x => start <= x && x <= end);
+                if (peak == 0 && !peaksUsed.Contains(peak))
+                {
+                    return false;
+                }
+                peaksUsed.Add(peak);
+            }
+
+            return true;
+        }
+
+        private bool IsPrimeNumber(int number)
+        {
+            if (number == 1 || number == 2)
+                return true;
+
+            if (number % 2 == 0)
+                return false;
+
+            int squareRoot = (int)Math.Floor(Math.Sqrt(number));
+
+            for (int i = 3; i <= squareRoot; i += 2)
+            {
+                if (number % i == 0)
+                    return false;
+            }
+
+            return true;
+        }
+
+        #endregion
+
+        #region Brackets
+
+        public int Brackets(string S)
+        {
+            Stack<char> stack = new Stack<char>();
+
+            char[] arr = S.ToCharArray();
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] == ']') 
+                {
+                    if (stack.Count > 0 && stack.Peek() == '[')
+                        stack.Pop();
+                    else
+                        return 0;
+                }
+                else if (arr[i] == '}')
+                {
+                    if (stack.Count > 0 && stack.Peek() == '{')
+                        stack.Pop();
+                    else
+                        return 0;
+                }
+                else if (arr[i] == ')')
+                {
+                    if (stack.Count > 0 && stack.Peek() == '(')
+                        stack.Pop();
+                    else
+                        return 0;
+                }
+                else
+                {
+                    stack.Push(arr[i]);
+                }
+            }
+
+            if (stack.Count != 0)
+                return 0;
+
+            return 1;
         }
 
         #endregion
