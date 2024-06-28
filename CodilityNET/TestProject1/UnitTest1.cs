@@ -120,5 +120,16 @@ namespace TestProject1
 
             Assert.Equal(expectedResult, result);
         }
+
+        [Theory]
+        [InlineData(new int[] { 1, 3, 2 , 5, 4 }, 1)]
+        [InlineData(new int[] { 3, 1, 2, 4, 3 }, 0)]
+        [InlineData(new int[] { 4, 1, 3 }, 0)]
+        public void PermCheck_Test(int[] input, int expectedResult)
+        {
+            int result = _exercise.PermCheck(input);
+
+            Assert.Equal(expectedResult, result);
+        }
     }
 }

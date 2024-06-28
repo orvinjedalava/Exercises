@@ -195,5 +195,35 @@ namespace CodilityNET
         }
 
         #endregion
+
+        #region PermCheck
+
+        public int PermCheck(int[] A)
+        {
+            int maxValue = A.Length;
+            HashSet<int> set = new HashSet<int>();
+
+            while(maxValue >= 1)
+            {
+                set.Add(maxValue);
+                maxValue--;
+            }
+
+            for(int i = 0; i < A.Length; i++)
+            {
+                if (A[i] > A.Length)
+                    return 0;
+
+                if (set.Contains(A[i]))
+                    set.Remove(A[i]);
+            }
+
+            if (set.Count > 0)
+                return 0;
+
+            return 1;
+        }
+
+        #endregion
     }
 }
