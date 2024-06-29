@@ -248,5 +248,31 @@ namespace TestProject1
 
             Assert.Equal(expectedResult, result);
         }
+
+        //[Theory]
+        //[InlineData(3, 5, new int[] { 2,1,5,1,2,2,2}, 6)]
+        //public void MinMaxDivision_Test(int size, int max, int[] input, int expectedResult)
+        //{
+        //    int result = _exercise.MinMaxDivision(size, max, input);
+
+        //    Assert.Equal(expectedResult, result);
+        //}
+
+        [Theory]
+        [InlineData(new int[] { 1, 2, 3, 4, 1, 1, 3 }, 4,  3)]
+        [InlineData(new int[] { }, 4, 0)]
+        [InlineData(new int[] { 4}, 4, 1)]
+        [InlineData(new int[] { 3 }, 4, 0)]
+        [InlineData(new int[] { 2, 5, 2 }, 5, 1)]
+        [InlineData(new int[] { 2, 3, 5 }, 5, 2)]
+        [InlineData(new int[] { 3, 5, 2 }, 5, 1)]
+        [InlineData(new int[] { 2, 2, 5 }, 5, 1)]
+        [InlineData(new int[] { 1, 1, 4, 1, 1 }, 5, 1)]
+        public void TieRopes_Test(int[] input, int max,  int expectedResult)
+        {
+            int result = _exercise.TieRopes(max, input);
+
+            Assert.Equal(expectedResult, result);
+        }
     }
 }
