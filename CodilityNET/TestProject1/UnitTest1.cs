@@ -221,5 +221,32 @@ namespace TestProject1
 
             Assert.Equal(expectedResult, result);
         }
+
+        [Theory]
+        [InlineData(new int[] { 4, 3, 2, 1, 5 }, new int[] { 0, 1, 0, 0, 0 }, 2)]
+        [InlineData(new int[] { 0 }, new int[] { 0 }, 1)]
+        [InlineData(new int[] { 6 }, new int[] { 1 }, 1)]
+
+        [InlineData(new int[] { 0, 1 }, new int[] { 0, 0 }, 2)]
+        [InlineData(new int[] { 0, 1 }, new int[] { 0, 1 }, 2)]
+        [InlineData(new int[] { 0, 1 }, new int[] { 1, 0 }, 1)]
+        [InlineData(new int[] { 0, 1 }, new int[] { 1, 1 }, 2)]
+
+        [InlineData(new int[] { 1, 0 }, new int[] { 0, 0 }, 2)]
+        [InlineData(new int[] { 1, 0 }, new int[] { 0, 1 }, 2)]
+        [InlineData(new int[] { 1, 0 }, new int[] { 1, 0 }, 1)]
+        [InlineData(new int[] { 1, 0 }, new int[] { 1, 1 }, 2)]
+
+        [InlineData(new int[] { 0, 1, 2 }, new int[] { 1, 1, 0 }, 1)]
+        [InlineData(new int[] { 0, 1, 2 }, new int[] { 0, 1, 0 }, 2)]
+
+        [InlineData(new int[] { 2, 1, 0 }, new int[] { 1, 1, 0 }, 2)]
+
+        public void Fish_Test(int[] sizes, int[] directions, int expectedResult)
+        {
+            int result = _exercise.Fish(sizes, directions);
+
+            Assert.Equal(expectedResult, result);
+        }
     }
 }

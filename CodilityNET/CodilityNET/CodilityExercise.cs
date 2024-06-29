@@ -614,5 +614,100 @@ namespace CodilityNET
         }
 
         #endregion
+
+        #region Fish
+
+        public int Fish(int[] A, int[] B)
+        {
+            if (A.Length == 0)
+                return 0;
+
+            if (A.Length == 1)
+                return 1;
+
+            Dictionary<int, int> fishToDirections = new Dictionary<int, int>();
+            for (int i = 0; i < A.Length; i++)
+            {
+                fishToDirections.Add(A[i], B[i]);
+            }
+
+            Queue<int> queue = new Queue<int>(A.ToList());
+            Stack<int> stack = new Stack<int>();
+
+            while(queue.Any())
+            {
+                int fish = queue.Dequeue();
+                if (fishToDirections[fish] == 0)
+                {
+                    if (!stack.Any())
+                    {
+                        stack.Push(fish);
+                        continue;
+                    }
+                    while (stack.Any())
+                    {
+                        int prevFish = stack.Peek();
+                        if (fishToDirections[prevFish] == 1)
+                        {
+                            if (prevFish > fish)
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                stack.Pop();
+                                if (stack.Count == 0)
+                                {
+                                    stack.Push(fish);
+                                    break;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            stack.Push(fish);
+                            break;
+                        }
+                    }
+                    
+                }
+                else
+                {
+                    if (!queue.Any())
+                    {
+                        stack.Push(fish);
+                        continue;
+                    }
+                    while(queue.Any())
+                    {
+                        if (queue.Count == 0)
+                            stack.Push(fish);
+                        int nextFish = queue.Peek();
+                        if (fishToDirections[nextFish] == 0)
+                        {
+                            if (nextFish > fish)
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                queue.Dequeue();
+                                if (queue.Count == 0)
+                                    stack.Push(fish);
+                            }
+                        }
+                        else
+                        {
+                            stack.Push(fish);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return stack.Count;
+        }
+
+        #endregion
     }
 }
