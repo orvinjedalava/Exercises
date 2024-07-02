@@ -1,0 +1,16 @@
+GET http://localhost:3000/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTWVsIiwiaWF0IjoxNzE5ODk2NDg1fQ.CIxQZylcWfGjSyWtyaurkeH1pII88F75ZWCDInQtEUI
+
+###
+
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "username": "Mel"
+}
+
+###
+
+GET http://localhost:4000/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTWVsIiwiaWF0IjoxNzE5ODk2Njc2fQ.sIMitrv1m3z6b8RDw8ONJiZ0cjkcCWifdNLyaBEStl0
