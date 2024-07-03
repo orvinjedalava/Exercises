@@ -81,29 +81,14 @@ app.put("/api/users/:id", resolveUserIndex, (request, response) => {
     return response.sendStatus(200);
 });
 
-app.patch('/api/users/:id', (request, response) => {
-    const {
-        body,
-        params: { id }
-    } = request;
+app.patch('/api/users/:id', resolveUserIndex, (request, response) => {
+    const { body, userIndex } = request;
 
-    const parsedId = parseInt(id);
-    console.log(parsedId);
+    console.log(userIndex);
 
-    if (isNaN(parsedId)) return response.status(400).send( {msg: 'Bad request. Invalid ID.'});
-
-    const findUserIndex = mockUsers.findIndex((user) => user.id === parsedId );
-
-    console.log(findUserIndex);
-
-    if (findUserIndex === -1)
-        return response.sendStatus(404);
-
-    console.log('here');
-
-    mockUsers[findUserIndex] = 
+    mockUsers[userIndex] = 
     { 
-        ...mockUsers[findUserIndex], 
+        ...mockUsers[userIndex], 
         ...body 
     };
 
