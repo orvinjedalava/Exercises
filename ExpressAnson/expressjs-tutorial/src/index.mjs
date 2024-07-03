@@ -16,13 +16,24 @@ app.get('/', (request, response) => {
 });
 
 app.get('/api/users', (request, response) => {
+    console.log(request.query);
+    const { 
+        query: { filter, value } 
+    } = request;
+
+    if (filter && value) return response.send(
+        mockUsers.filter((user) => user[filter].includes(value))
+    );
+
     response.send(mockUsers);
+
+    //response.send(mockUsers);
 });
 
 app.get('/api/users/:id', (request, response) => {
-    console.log(request.params);
+    //console.log(request.params);
     const parsedId = parseInt(request.params.id);
-    console.log(parsedId);
+    //console.log(parsedId);
     if (isNaN([parsedId]))
         return response.status(400).send( {msg: 'Bad request. Invalid ID.'});
 
