@@ -95,23 +95,12 @@ app.patch('/api/users/:id', resolveUserIndex, (request, response) => {
     return response.sendStatus(200);
 });
 
-app.delete('/api/users/:id', (request, response) => {
-    const { params: { id }} = request;
+app.delete('/api/users/:id', resolveUserIndex, (request, response) => {
+    const { userIndex } = request;
 
-    const parsedId = parseInt(id);
-
-    if (isNaN(parsedId)) return response.status(404).send('Bad request. Invalid ID');
-
-    const findUserIndex = mockUsers.findIndex((user) => user.id === parsedId);
-
-    if (findUserIndex === -1)
-        response.status(404).send('Id does not exist');
-
-    mockUsers.splice(findUserIndex, 1);
+    mockUsers.splice(userIndex, 1);
 
     response.status(200).send('Record deleted.');
-
-
 });
 
 app.get('/api/users/:id', (request, response) => {
