@@ -59,8 +59,6 @@ app.get('/api/users', (request, response) => {
     );
 
     response.send(mockUsers);
-
-    //response.send(mockUsers);
 });
 
 app.post('/api/users', (request, response) => {
@@ -68,6 +66,7 @@ app.post('/api/users', (request, response) => {
     const { body } = request;
     const newUser = { id: mockUsers[mockUsers.length - 1].id + 1, ...body };
     mockUsers.push(newUser);
+
     return response.status(201).send(newUser);
 });
 
@@ -97,25 +96,16 @@ app.patch('/api/users/:id', resolveUserIndex, (request, response) => {
 
 app.delete('/api/users/:id', resolveUserIndex, (request, response) => {
     const { userIndex } = request;
-
     mockUsers.splice(userIndex, 1);
 
     response.status(200).send('Record deleted.');
 });
 
-app.get('/api/users/:id', (request, response) => {
-    //console.log(request.params);
-    const parsedId = parseInt(request.params.id);
-    //console.log(parsedId);
-    if (isNaN(parsedId))
-        return response.status(400).send( {msg: 'Bad request. Invalid ID.'});
+app.get('/api/users/:id', resolveUserIndex, (request, response) => {
+    const { userIndex } = request;
+    console.log(userIndex);
 
-    const findUser = mockUsers.find((user) => user.id === parsedId);
-
-    if (!findUser) 
-        return response.sendStatus(404);
-
-    return response.send(findUser);
+    return response.send(mockUsers[userIndex]);
 });
 
 app.get('/api/products', (request, response) => {
