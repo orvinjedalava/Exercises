@@ -1,4 +1,6 @@
 import express from 'express';
+import { query, validationResult, body, matchedData, checkSchema } from 'express-validator';
+import { createUserValidationSchema } from './utils/validationSchemas.mjs';
 
 const app = express();
 
@@ -48,27 +50,57 @@ app.get('/',
     response.status(201).send({ msg: 'Hello!'});
 });
 
-app.get('/api/users', (request, response) => {
-    console.log(request.query);
-    const { 
-        query: { filter, value } 
-    } = request;
+app.get('/api/users', 
+    query('filter')
+        .isString()
+        .notEmpty().withMessage('Must not be empty')
+        .isLength({ min: 3, max: 10 }).withMessage('Must be at least 3-10 characters'),
+    (request, response) => {
+        //console.log(request['express-validator#contexts']);
+        const result = validationResult(request);
+        console.log(result);
+        const data = matchedData(request);
+        console.log(`matchedData: ${JSON.stringify(data)}`);
 
-    if (filter && value) return response.send(
-        mockUsers.filter((user) => user[filter].includes(value))
-    );
+        const { 
+            query: { filter, value } 
+        } = request;
 
-    response.send(mockUsers);
-});
+        if (filter && value) return response.send(
+            mockUsers.filter((user) => user[filter].includes(value))
+        );
 
-app.post('/api/users', (request, response) => {
-    console.log(request.body);
-    const { body } = request;
-    const newUser = { id: mockUsers[mockUsers.length - 1].id + 1, ...body };
-    mockUsers.push(newUser);
+        response.send(mockUsers);
+    });
 
-    return response.status(201).send(newUser);
-});
+app.post('/api/users',
+    // [ 
+    //     body('username')
+    //         .notEmpty().withMessage('Username cannot be empty')
+    //         .isString().withMessage('Username must be a string')
+    //         .isLength({ min: 5, max: 32}).withMessage('Username must be at least 5-32 characters'),
+    //     body('displayName')
+    //         .notEmpty().withMessage('DisplayName should not be empty')
+    // ],
+    checkSchema(createUserValidationSchema, ['body']),
+    (request, response) => {
+        // validationResult extracts all error messages performed from middleware ( body, query )
+        const result = validationResult(request);
+        console.log(result);
+
+        if (!result.isEmpty())
+            return response.status(400).send({ errors: result.array()});
+
+        // get all data that has been validated by body() and query()
+        const data = matchedData(request);
+        console.log(data);
+
+        const newUser = { id: mockUsers[mockUsers.length - 1].id + 1, ...data };
+        mockUsers.push(newUser);
+
+        return response.status(201).send(newUser);
+    }
+);
 
 app.put("/api/users/:id", resolveUserIndex, (request, response) => {
     const { body, userIndex } = request;
