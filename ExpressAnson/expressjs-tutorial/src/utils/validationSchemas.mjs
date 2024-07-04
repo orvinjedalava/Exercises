@@ -23,6 +23,7 @@ export const createUserValidationSchema = {
 
 export const createQueryValidationSchema = {
     filter: {
+        optional: true,
         isString: {
             errorMessage: 'Filter must be a string!'
         },
@@ -38,6 +39,7 @@ export const createQueryValidationSchema = {
         }
     },
     value: {
+        optional: true,
         isString: {
             errorMessage: 'Value must be a string'
         },

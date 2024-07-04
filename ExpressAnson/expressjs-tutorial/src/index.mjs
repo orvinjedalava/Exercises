@@ -1,17 +1,20 @@
 import express from 'express';
 import { query, validationResult, body, matchedData, checkSchema } from 'express-validator';
 import { createUserValidationSchema, createQueryValidationSchema } from './utils/validationSchemas.mjs';
+import usersRouter from './routes/users.mjs';
+import { mockUsers } from './utils/constants.mjs';
 
 const app = express();
 
 app.use(express.json());
+app.use(usersRouter);
 
 const PORT = process.env.PORT || 3000;
 
-const mockUsers = [
-    { id: 1, username: 'anson', displayName: 'Anson'},
-    { id: 2, username: 'mel', displayName: 'Mel' },
-    { id: 3, username: 'jed', displayName: 'Jed'}];
+// const mockUsers = [
+//     { id: 1, username: 'anson', displayName: 'Anson'},
+//     { id: 2, username: 'mel', displayName: 'Mel' },
+//     { id: 3, username: 'jed', displayName: 'Jed'}];
 
 
 const loggingMiddleware = (request, response, next) => {
@@ -50,48 +53,50 @@ app.get('/',
     response.status(201).send({ msg: 'Hello!'});
 });
 
-app.get('/api/users', 
-    checkSchema(createQueryValidationSchema, ['query']),
-    (request, response) => {
-        const result = validationResult(request);
-        console.log(result);
+// app.get('/api/users', 
+//     checkSchema(createQueryValidationSchema, ['query']),
+//     (request, response) => {
+//         const result = validationResult(request);
+//         console.log(result);
         
-        if (!result.isEmpty())
-            return response.status(400).send({errors: result.array()});
+//         if (!result.isEmpty())
+//             return response.status(400).send({errors: result.array()});
 
-        const { 
-            query: { filter, value } 
-        } = request;
+//         const { 
+//             query: { filter, value } 
+//         } = request;
 
-        if (filter && value) return response.send(
-            mockUsers.filter((user) => user[filter].includes(value))
-        );
+//         if (filter && value) return response.send(
+//             mockUsers.filter((user) => user[filter].includes(value))
+//         );
 
-        response.send(mockUsers);
-    });
+//         response.send(mockUsers);
+//     });
 
-app.post('/api/users',
+// app.post('/api/users',
+//     checkSchema(createUserValidationSchema, ['body']),
+//     (request, response) => {
+//         // validationResult extracts all error messages performed from middleware ( body, query )
+//         const result = validationResult(request);
+//         console.log(result);
+
+//         if (!result.isEmpty())
+//             return response.status(400).send({ errors: result.array()});
+
+//         // get all data that has been validated by body() and query()
+//         const data = matchedData(request);
+//         console.log(data);
+
+//         const newUser = { id: mockUsers[mockUsers.length - 1].id + 1, ...data };
+//         mockUsers.push(newUser);
+
+//         return response.status(201).send(newUser);
+//     }
+// );
+
+app.put("/api/users/:id", 
     checkSchema(createUserValidationSchema, ['body']),
-    (request, response) => {
-        // validationResult extracts all error messages performed from middleware ( body, query )
-        const result = validationResult(request);
-        console.log(result);
-
-        if (!result.isEmpty())
-            return response.status(400).send({ errors: result.array()});
-
-        // get all data that has been validated by body() and query()
-        const data = matchedData(request);
-        console.log(data);
-
-        const newUser = { id: mockUsers[mockUsers.length - 1].id + 1, ...data };
-        mockUsers.push(newUser);
-
-        return response.status(201).send(newUser);
-    }
-);
-
-app.put("/api/users/:id", resolveUserIndex, (request, response) => {
+    resolveUserIndex, (request, response) => {
     const { body, userIndex } = request;
 
     mockUsers[userIndex] = { 
