@@ -3,11 +3,15 @@ import './App.css';
 import ClassCounter from './components/ClassCounter.js';
 import HookCounter from './components/HookCounter.js';
 import HookCounterTwo from './components/HookCounterTwo.js';
+import HookCounterThree from './components/HookCounterThree.js';
+import ClassCounterThreeJed from './components/ClassCounterThreeJed.js';
 
 function App() {
   return (
     <div className="App">
-      <HookCounterTwo />
+      <ClassCounterThreeJed />
+      {/*<HookCounterThree/>*/}
+      {/*<HookCounterTwo />*/}
       {/*<HookCounter />*/}
       {/*<ClassCounter />*/}
       {/* <header className="App-header">
