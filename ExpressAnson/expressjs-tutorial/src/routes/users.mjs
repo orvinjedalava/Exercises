@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { checkSchema, validationResult, matchedData } from 'express-validator';
 import { createQueryValidationSchema, createUserValidationSchema } from '../utils/validationSchemas.mjs';
 import { mockUsers } from '../utils/constants.mjs';
+import { resolveUserIndex } from '../utils/middlewares.mjs'; 
 
 const router = Router();
 
@@ -45,5 +46,59 @@ router.post('/api/users',
         return response.status(201).send(newUser);
     }
 );
+
+router.put("/api/users/:id", 
+    checkSchema(createUserValidationSchema, ['body']),
+    resolveUserIndex, 
+    (request, response) => {
+    const { body, userIndex } = request;
+
+    mockUsers[userIndex] = { 
+        id: mockUsers[userIndex].id,
+        ...body };
+
+    return response.sendStatus(200);
+});
+
+router.put("/api/users/:id", 
+    checkSchema(createUserValidationSchema, ['body']),
+    resolveUserIndex, 
+    (request, response) => {
+    const { body, userIndex } = request;
+
+    mockUsers[userIndex] = { 
+        id: mockUsers[userIndex].id,
+        ...body };
+
+    return response.sendStatus(200);
+});
+
+router.patch('/api/users/:id', resolveUserIndex, (request, response) => {
+    const { body, userIndex } = request;
+
+    console.log(userIndex);
+
+    mockUsers[userIndex] = 
+    { 
+        ...mockUsers[userIndex], 
+        ...body 
+    };
+
+    return response.sendStatus(200);
+});
+
+router.delete('/api/users/:id', resolveUserIndex, (request, response) => {
+    const { userIndex } = request;
+    mockUsers.splice(userIndex, 1);
+
+    response.status(200).send('Record deleted.');
+});
+
+router.get('/api/users/:id', resolveUserIndex, (request, response) => {
+    const { userIndex } = request;
+    console.log(userIndex);
+
+    return response.send(mockUsers[userIndex]);
+});
 
 export default router;
