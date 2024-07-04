@@ -1,6 +1,6 @@
 import express from 'express';
 import { query, validationResult, body, matchedData, checkSchema } from 'express-validator';
-import { createUserValidationSchema } from './utils/validationSchemas.mjs';
+import { createUserValidationSchema, createQueryValidationSchema } from './utils/validationSchemas.mjs';
 
 const app = express();
 
@@ -51,16 +51,13 @@ app.get('/',
 });
 
 app.get('/api/users', 
-    query('filter')
-        .isString()
-        .notEmpty().withMessage('Must not be empty')
-        .isLength({ min: 3, max: 10 }).withMessage('Must be at least 3-10 characters'),
+    checkSchema(createQueryValidationSchema, ['query']),
     (request, response) => {
-        //console.log(request['express-validator#contexts']);
         const result = validationResult(request);
         console.log(result);
-        const data = matchedData(request);
-        console.log(`matchedData: ${JSON.stringify(data)}`);
+        
+        if (!result.isEmpty())
+            return response.status(400).send({errors: result.array()});
 
         const { 
             query: { filter, value } 
@@ -74,14 +71,6 @@ app.get('/api/users',
     });
 
 app.post('/api/users',
-    // [ 
-    //     body('username')
-    //         .notEmpty().withMessage('Username cannot be empty')
-    //         .isString().withMessage('Username must be a string')
-    //         .isLength({ min: 5, max: 32}).withMessage('Username must be at least 5-32 characters'),
-    //     body('displayName')
-    //         .notEmpty().withMessage('DisplayName should not be empty')
-    // ],
     checkSchema(createUserValidationSchema, ['body']),
     (request, response) => {
         // validationResult extracts all error messages performed from middleware ( body, query )
