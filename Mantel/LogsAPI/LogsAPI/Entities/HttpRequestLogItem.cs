@@ -34,5 +34,26 @@ namespace LogsAPI.Entities
         public int HttpResponseStatusCode { get; private set; }
         public int Port { get; private set; }
         public string UserAgent { get; private set; }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj == null) return false;
+
+            HttpRequestLogItem? item = obj as HttpRequestLogItem;
+
+            return IPAddress.ToString() == item?.IPAddress.ToString() 
+                && Timestamp == item?.Timestamp
+                && HttpMethod == item?.HttpMethod
+                && Url == item?.Url
+                && HttpProtocol == item?.HttpProtocol
+                && HttpResponseStatusCode == item?.HttpResponseStatusCode
+                && Port == item?.Port
+                && UserAgent == item?.UserAgent;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }

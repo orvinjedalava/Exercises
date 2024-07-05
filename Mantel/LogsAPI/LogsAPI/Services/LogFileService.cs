@@ -42,8 +42,17 @@ namespace LogsAPI.Services
 
         }
 
+        IEnumerable<LogItem> ILogFileService.CreateLogItems(string rawStringLogs, LogType logType)
+        {
+            List<string> rawStringLogList = rawStringLogs.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries).ToList();
+
+            return rawStringLogList.Select(log => CreateLogItem(log, logType));
+        }
+
         public LogReport GenerateLogReport(string rawStringLogs, LogType logType)
         {
+            IReportGenerator reportGenerator = GetReportGenerator(logType);
+
             throw new NotImplementedException();
             
         }

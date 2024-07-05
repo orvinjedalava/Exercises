@@ -23,9 +23,10 @@ namespace LogsAPI.Tests
             _service = new LogFileService();
         }
 
-        [Theory, ClassData(typeof(CreateHttpRequestLogItemTestData))]
+        [Theory, ClassData(typeof(CreateLogItemTestData))]
         public void GenerateLogItem_Test(
             string rawStringLog,
+            LogType logType,
             IPAddress expectedIPAddress,
             DateTime expectedTimestamp,
             HttpMethod expectedHttpMethod,
@@ -36,27 +37,78 @@ namespace LogsAPI.Tests
             string expectedUserAgent
             )
         {
-            HttpRequestLogItem? result = _service.CreateLogItem(rawStringLog, Enums.LogType.HttpRequest) as HttpRequestLogItem;
-
-            if (result == null)
+            if (logType == LogType.None)
             {
-                Assert.Fail($"Result came back null or result is not of type {typeof(HttpRequestLogItem)}");
+                Assert.Throws<NotImplementedException>(() => _service.CreateLogItem(rawStringLog, LogType.None));
                 return;
             }
-            else
+
+            LogItem logItem = _service.CreateLogItem(rawStringLog, logType);
+
+            
+            switch(logType)
             {
-                using (new AssertionScope())
-                {
-                    result.IPAddress.Should().Be(expectedIPAddress);
-                    result.Timestamp.Should().Be(expectedTimestamp);
-                    result.HttpMethod.Should().Be(expectedHttpMethod);
-                    result.Url.Should().Be(expectedUrl);
-                    result.HttpProtocol.Should().Be(expectedHttpProtocol);
-                    result.HttpResponseStatusCode.Should().Be(expectedHttpResponseStatusCode);
-                    result.Port.Should().Be(expectedPort);
-                    result.UserAgent.Should().Be(expectedUserAgent);
-                    result.RawStringLog.Should().Be(rawStringLog);
-                }
+                case LogType.HttpRequest:
+                    HttpRequestLogItem? result = logItem as HttpRequestLogItem;
+
+                    if (result == null)
+                    {
+                        Assert.Fail($"LogItem is not of type {typeof(HttpRequestLogItem)}");
+                    }
+
+                    using (new AssertionScope())
+                    {
+                        result.IPAddress.Should().Be(expectedIPAddress);
+                        result.Timestamp.Should().Be(expectedTimestamp);
+                        result.HttpMethod.Should().Be(expectedHttpMethod);
+                        result.Url.Should().Be(expectedUrl);
+                        result.HttpProtocol.Should().Be(expectedHttpProtocol);
+                        result.HttpResponseStatusCode.Should().Be(expectedHttpResponseStatusCode);
+                        result.Port.Should().Be(expectedPort);
+                        result.UserAgent.Should().Be(expectedUserAgent);
+                        result.RawStringLog.Should().Be(rawStringLog);
+                    }
+
+                    break;
+                default:
+                    throw new NotImplementedException();
+            };
+        }
+
+        [Theory, ClassData(typeof(CreateLogItemsTestData))]
+        public void CreateLogItems_Test(string rawStringLogs, LogType logType, List<LogItem> expectedResult)
+        {
+            if (logType == LogType.None)
+            {
+                Assert.Throws<NotImplementedException>(() => _service.CreateLogItems(rawStringLogs, logType));
+                return;
+            }
+
+            IEnumerable<LogItem> logItems = _service.CreateLogItems(rawStringLogs, logType);
+
+            switch(logType)
+            {
+                case LogType.HttpRequest:
+                    int index = 0;
+
+                    foreach(LogItem item in logItems)
+                    {
+                        HttpRequestLogItem? result = item as HttpRequestLogItem;
+
+                        if (result == null)
+                        {
+                            Assert.Fail($"LogItem is not of type {typeof(HttpRequestLogItem)}");
+                            return;
+                        }
+
+                        Assert.True(expectedResult[index].Equals(result));
+
+                        index++;
+                    }
+
+                    break;
+                default:
+                    throw new NotImplementedException();
             }
         }
 
@@ -90,8 +142,8 @@ namespace LogsAPI.Tests
             result.GetType().Should().Be(expectedResult);
         }
 
-        [Theory, ClassData(typeof(GenerateLogSummaryTestData))]
-        public void GenerateLogSummary_Test(
+        [Theory, ClassData(typeof(GenerateLogReportTestData))]
+        public void GenerateLogReport_Test(
             string rawStringLogs,
             LogType logType,
             int expectedUniqueIPAddressCount,

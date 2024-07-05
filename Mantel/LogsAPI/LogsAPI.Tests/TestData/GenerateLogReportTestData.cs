@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace LogsAPI.Tests.TestData
 {
-    internal class GenerateLogSummaryTestData : IEnumerable<object[]>
+    internal class GenerateLogReportTestData : IEnumerable<object[]>
     {
 
         private IEnumerable<object[]> _data = new List<object[]>()

@@ -4,6 +4,6 @@ namespace LogsAPI.ReportGenerators.Interfaces
 {
     public interface IReportGenerator
     {
-        LogReport GenerateReport();
+        LogReport GenerateReport(string rawStringLogs);
     }
 }

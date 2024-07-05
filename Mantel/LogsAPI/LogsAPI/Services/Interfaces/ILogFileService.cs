@@ -11,5 +11,6 @@ namespace LogsAPI.Services.Interfaces
         LogReport GenerateLogReport(string rawStringLogs, LogType logType);
         ILogParser GetLogParser(LogType logType);
         IReportGenerator GetReportGenerator(LogType logType);
+        IEnumerable<LogItem> CreateLogItems(string rawStringLogs, LogType logType);
     }
 }

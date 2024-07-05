@@ -5,7 +5,7 @@ namespace LogsAPI.ReportGenerators
 {
     public class HttpRequestsLogReportGenerator : IReportGenerator
     {
-        public LogReport GenerateReport()
+        public LogReport GenerateReport(string rawStringLogs)
         {
             throw new NotImplementedException();
         }
