@@ -1,10 +1,9 @@
 using FluentAssertions;
 using FluentAssertions.Execution;
-using LogsAPI.Interfaces.Services;
-using LogsAPI.Models;
+using LogsAPI.Entities;
 using LogsAPI.Services;
+using LogsAPI.Services.Interfaces;
 using LogsAPI.Tests.TestData;
-using System.Collections;
 using System.Net;
 
 namespace LogsAPI.Tests
@@ -32,19 +31,26 @@ namespace LogsAPI.Tests
             string expectedRawStringLog
             )
         {
-            LogItem result = _service.GenerateLogItem(input);
+            HttpRequestLogItem? result = _service.CreateLogItem(input, Enums.LogItemType.HttpRequest) as HttpRequestLogItem;
 
-            using (new AssertionScope())
+            if (result == null)
             {
-                result.IPAddress.Should().Be(expectedIPAddress);
-                result.Timestamp.Should().Be(expectedTimestamp);
-                result.HttpMethod.Should().Be(expectedHttpMethod);
-                result.Url.Should().Be(expectedUrl);
-                result.HttpProtocol.Should().Be(expectedHttpProtocol);
-                result.HttpResponseStatusCode.Should().Be(expectedHttpResponseStatusCode);
-                result.Port.Should().Be(expectedPort);
-                result.UserAgent.Should().Be(expectedUserAgent);
-                result.RawStringLog.Should().Be(expectedRawStringLog);
+                Assert.Fail($"Result came back null or result is not of type {typeof(HttpRequestLogItem)}");
+            }
+            else
+            {
+                using (new AssertionScope())
+                {
+                    result.IPAddress.Should().Be(expectedIPAddress);
+                    result.Timestamp.Should().Be(expectedTimestamp);
+                    result.HttpMethod.Should().Be(expectedHttpMethod);
+                    result.Url.Should().Be(expectedUrl);
+                    result.HttpProtocol.Should().Be(expectedHttpProtocol);
+                    result.HttpResponseStatusCode.Should().Be(expectedHttpResponseStatusCode);
+                    result.Port.Should().Be(expectedPort);
+                    result.UserAgent.Should().Be(expectedUserAgent);
+                    result.RawStringLog.Should().Be(expectedRawStringLog);
+                }
             }
         }
     }

@@ -1,5 +1,6 @@
-﻿using LogsAPI.Interfaces.Services;
-using LogsAPI.Models;
+﻿using LogsAPI.Entities;
+using LogsAPI.Enums;
+using LogsAPI.Services.Interfaces;
 using System;
 using System.Net;
 
@@ -7,7 +8,7 @@ namespace LogsAPI.Services
 {
     public class LogFileService : ILogFileService
     {
-        public LogItem GenerateLogItem(string rawStringLog)
+        public LogItem CreateLogItem(string rawStringLog, LogItemType logItemType)
         {
             string[] logElements = rawStringLog.Split(' ');
 
@@ -21,7 +22,7 @@ namespace LogsAPI.Services
             string userAgentTemp = string.Join(' ', logElements.Skip(11));
             string userAgent = userAgentTemp.Substring(1, userAgentTemp.Length - 2);
 
-            return new LogItem(
+            return new HttpRequestLogItem(
                 ipAddress: ipAddress,
                 timestamp: timestamp,
                 httpMethod: httpMethod,
@@ -32,6 +33,11 @@ namespace LogsAPI.Services
                 userAgent: userAgent,
                 rawStringLog: rawStringLog);
             ;
+        }
+
+        public LogSummary GenerateLogSummary(string rawStringLogs, LogItemType logItemType)
+        {
+            throw new NotImplementedException();
         }
     }
 }

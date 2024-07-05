@@ -1,21 +1,20 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Net;
+﻿using System.Net;
 
-namespace LogsAPI.Models
+namespace LogsAPI.Entities
 {
-    public class LogItem
+    public class HttpRequestLogItem : LogItem
     {
-        public LogItem(
-            IPAddress ipAddress,
-            DateTime timestamp,
-            HttpMethod httpMethod,
-            string url,
-            string httpProtocol,
-            int httpResponseStatusCode,
-            int port,
-            string userAgent,
-            string rawStringLog)
+        public HttpRequestLogItem(
+           IPAddress ipAddress,
+           DateTime timestamp,
+           HttpMethod httpMethod,
+           string url,
+           string httpProtocol,
+           int httpResponseStatusCode,
+           int port,
+           string userAgent,
+           string rawStringLog)
+            : base(rawStringLog)
         {
             IPAddress = ipAddress;
             Timestamp = timestamp;
@@ -25,7 +24,6 @@ namespace LogsAPI.Models
             HttpResponseStatusCode = httpResponseStatusCode;
             Port = port;
             UserAgent = userAgent;
-            RawStringLog = rawStringLog;
         }
 
         public IPAddress IPAddress { get; private set; }
@@ -36,12 +34,5 @@ namespace LogsAPI.Models
         public int HttpResponseStatusCode { get; private set; }
         public int Port { get; private set; }
         public string UserAgent { get; private set; }
-        
-        /// <summary>
-        /// Represents the original log record
-        /// </summary>
-        public string RawStringLog { get; private set; }
-        
-
     }
 }
