@@ -1,6 +1,6 @@
 ﻿namespace LogsAPI.Enums
 {
-    public enum LogItemType
+    public enum LogType
     {
         None,
         HttpRequest

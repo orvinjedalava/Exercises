@@ -2,6 +2,8 @@
 using LogsAPI.Enums;
 using LogsAPI.Parsers;
 using LogsAPI.Parsers.Interfaces;
+using LogsAPI.ReportGenerators;
+using LogsAPI.ReportGenerators.Interfaces;
 using LogsAPI.Services.Interfaces;
 using System;
 using System.Net;
@@ -10,49 +12,40 @@ namespace LogsAPI.Services
 {
     public class LogFileService : ILogFileService
     {
-        public LogItem CreateLogItem(string rawStringLog, LogItemType logItemType)
+        public ILogParser GetLogParser(LogType logType)
         {
-            string[] logElements = rawStringLog.Split(' ');
-
-            IPAddress ipAddress = IPAddress.Parse(logElements[0]);
-            DateTime timestamp = DateTime.ParseExact($"{logElements[3]} {logElements[4]}", "[dd/MMM/yyyy:HH:mm:ss zzzz]", null);
-            HttpMethod httpMethod = HttpMethod.Parse(logElements[5].Substring(1));
-            string url = logElements[6];
-            string httpProtocol = logElements[7].Substring(0, logElements[7].Length - 1);
-            int httpResponseStatusCode = int.Parse(logElements[8]);
-            int port = int.Parse(logElements[9]);
-            string userAgentTemp = string.Join(' ', logElements.Skip(11));
-            string userAgent = userAgentTemp.Substring(1, userAgentTemp.Length - 2);
-
-            return new HttpRequestLogItem(
-                ipAddress: ipAddress,
-                timestamp: timestamp,
-                httpMethod: httpMethod,
-                url: url,
-                httpProtocol: httpProtocol,
-                httpResponseStatusCode: httpResponseStatusCode,
-                port: port,
-                userAgent: userAgent,
-                rawStringLog: rawStringLog);
-
-        }
-
-        public ILogParser GetLogParser(LogItemType logItemType)
-        {
-            switch(logItemType)
+            switch(logType)
             {
-                case LogItemType.HttpRequest:
+                case LogType.HttpRequest:
                     return new HttpRequestLogParser();
                 default:
-                    throw new NotImplementedException($"No parser implemented for {logItemType}");
+                    throw new NotImplementedException($"No parser implemented for {logType}");
             }
-
-            return null;
         }
 
-        public LogSummary GenerateLogSummary(string rawStringLogs, LogItemType logItemType)
+        public IReportGenerator GetReportGenerator(LogType logType)
+        {
+            switch (logType)
+            {
+                case LogType.HttpRequest:
+                    return new HttpRequestsLogReportGenerator();
+                default:
+                    throw new NotImplementedException($"No report generator implemented for {logType}");
+            }
+        }
+
+        public LogItem CreateLogItem(string rawStringLog, LogType logType)
+        {
+            ILogParser parser = GetLogParser(logType);
+
+            return parser.Parse(rawStringLog);
+
+        }
+
+        public LogReport GenerateLogReport(string rawStringLogs, LogType logType)
         {
             throw new NotImplementedException();
+            
         }
     }
 }

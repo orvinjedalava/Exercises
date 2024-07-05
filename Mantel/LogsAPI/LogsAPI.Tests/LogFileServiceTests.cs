@@ -4,6 +4,8 @@ using LogsAPI.Entities;
 using LogsAPI.Enums;
 using LogsAPI.Parsers;
 using LogsAPI.Parsers.Interfaces;
+using LogsAPI.ReportGenerators;
+using LogsAPI.ReportGenerators.Interfaces;
 using LogsAPI.Services;
 using LogsAPI.Services.Interfaces;
 using LogsAPI.Tests.TestData;
@@ -23,7 +25,7 @@ namespace LogsAPI.Tests
 
         [Theory, ClassData(typeof(CreateHttpRequestLogItemTestData))]
         public void GenerateLogItem_Test(
-            string input,
+            string rawStringLog,
             IPAddress expectedIPAddress,
             DateTime expectedTimestamp,
             HttpMethod expectedHttpMethod,
@@ -31,15 +33,15 @@ namespace LogsAPI.Tests
             string expectedHttpProtocol,
             int expectedHttpResponseStatusCode,
             int expectedPort,
-            string expectedUserAgent,
-            string expectedRawStringLog
+            string expectedUserAgent
             )
         {
-            HttpRequestLogItem? result = _service.CreateLogItem(input, Enums.LogItemType.HttpRequest) as HttpRequestLogItem;
+            HttpRequestLogItem? result = _service.CreateLogItem(rawStringLog, Enums.LogType.HttpRequest) as HttpRequestLogItem;
 
             if (result == null)
             {
                 Assert.Fail($"Result came back null or result is not of type {typeof(HttpRequestLogItem)}");
+                return;
             }
             else
             {
@@ -53,23 +55,84 @@ namespace LogsAPI.Tests
                     result.HttpResponseStatusCode.Should().Be(expectedHttpResponseStatusCode);
                     result.Port.Should().Be(expectedPort);
                     result.UserAgent.Should().Be(expectedUserAgent);
-                    result.RawStringLog.Should().Be(expectedRawStringLog);
+                    result.RawStringLog.Should().Be(rawStringLog);
                 }
             }
         }
 
         [Theory]
-        [InlineData(LogItemType.HttpRequest, typeof(HttpRequestLogParser))]
-        public void GetLogParser_Test(LogItemType input, Type expectedResult)
+        [InlineData(LogType.HttpRequest, typeof(HttpRequestLogParser))]
+        [InlineData(LogType.None, null)]
+        public void GetLogParser_Test(LogType input, Type expectedResult)
         {
-            ILogParser parser = _service.GetLogParser(input);
-            parser.GetType().Should().Be(expectedResult);
+            if (input == LogType.None)
+            {
+                Assert.Throws<NotImplementedException>(() => _service.GetLogParser(LogType.None));
+                return;
+            }
+            
+            ILogParser result = _service.GetLogParser(input);
+            result.GetType().Should().Be(expectedResult);
         }
 
-        [Fact]
-        public void GetLogParser_NotImplemented_Test()
+        [Theory]
+        [InlineData(LogType.HttpRequest, typeof(HttpRequestsLogReportGenerator))]
+        [InlineData(LogType.None, null)]
+        public void GetReportGenerator_Test(LogType input, Type expectedResult)
         {
-            Assert.Throws<NotImplementedException>(() => _service.GetLogParser(LogItemType.None));
+            if (input == LogType.None)
+            {
+                Assert.Throws<NotImplementedException>(() => _service.GetReportGenerator(input));
+                return;
+            }
+
+            IReportGenerator result = _service.GetReportGenerator(input);
+            result.GetType().Should().Be(expectedResult);
+        }
+
+        [Theory, ClassData(typeof(GenerateLogSummaryTestData))]
+        public void GenerateLogSummary_Test(
+            string rawStringLogs,
+            LogType logType,
+            int expectedUniqueIPAddressCount,
+            List<RankedItem> expectedMostVisitedURLs,
+            List<RankedItem> expectedMostActiveIPAddresses)
+        {
+
+            if (logType == LogType.None)
+            {
+                Assert.Throws<NotImplementedException>(() => _service.GenerateLogReport(rawStringLogs, logType));
+                return;
+            }
+
+            LogReport logSummary = _service.GenerateLogReport(rawStringLogs, logType);
+
+            switch(logType)
+            {
+                case LogType.HttpRequest:
+                    HttpRequestsLogReport? result = logSummary as HttpRequestsLogReport;
+                    if (result == null)
+                    {
+                        Assert.Fail($"Result is not the expected type of {typeof(HttpRequestsLogReport)}");
+                        return;
+                    }
+                    result.UniqueIPAddressCount.Should().Be(expectedUniqueIPAddressCount);
+
+                    result.MostVisitedURLs.Count.Should().Be(expectedMostVisitedURLs.Count);
+                    Assert.True(result.MostVisitedURLs[0].Equals(expectedMostVisitedURLs[0]));
+                    Assert.True(result.MostVisitedURLs[1].Equals(expectedMostVisitedURLs[1]));
+                    Assert.True(result.MostVisitedURLs[2].Equals(expectedMostVisitedURLs[2]));
+
+                    result.MostActiveIPAddresses.Count.Should().Be(expectedMostActiveIPAddresses.Count);
+                    Assert.True(result.MostActiveIPAddresses[0].Equals(expectedMostActiveIPAddresses[0]));
+                    Assert.True(result.MostActiveIPAddresses[1].Equals(expectedMostActiveIPAddresses[1]));
+                    Assert.True(result.MostActiveIPAddresses[2].Equals(expectedMostActiveIPAddresses[2]));
+
+                    break;
+                default:
+                    Assert.Fail($"LogType : {logType} not implemented.");
+                    break;
+            }
         }
     }
 }
