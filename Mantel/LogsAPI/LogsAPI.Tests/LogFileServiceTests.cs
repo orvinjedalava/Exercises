@@ -1,9 +1,13 @@
 using FluentAssertions;
 using FluentAssertions.Execution;
 using LogsAPI.Entities;
+using LogsAPI.Enums;
+using LogsAPI.Parsers;
+using LogsAPI.Parsers.Interfaces;
 using LogsAPI.Services;
 using LogsAPI.Services.Interfaces;
 using LogsAPI.Tests.TestData;
+using Microsoft.AspNetCore.Components;
 using System.Net;
 
 namespace LogsAPI.Tests
@@ -52,6 +56,20 @@ namespace LogsAPI.Tests
                     result.RawStringLog.Should().Be(expectedRawStringLog);
                 }
             }
+        }
+
+        [Theory]
+        [InlineData(LogItemType.HttpRequest, typeof(HttpRequestLogParser))]
+        public void GetLogParser_Test(LogItemType input, Type expectedResult)
+        {
+            ILogParser parser = _service.GetLogParser(input);
+            parser.GetType().Should().Be(expectedResult);
+        }
+
+        [Fact]
+        public void GetLogParser_NotImplemented_Test()
+        {
+            Assert.Throws<NotImplementedException>(() => _service.GetLogParser(LogItemType.None));
         }
     }
 }

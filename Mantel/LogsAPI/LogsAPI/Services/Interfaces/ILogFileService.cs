@@ -1,5 +1,6 @@
 ﻿using LogsAPI.Entities;
 using LogsAPI.Enums;
+using LogsAPI.Parsers.Interfaces;
 
 namespace LogsAPI.Services.Interfaces
 {
@@ -7,5 +8,6 @@ namespace LogsAPI.Services.Interfaces
     {
         LogItem CreateLogItem(string rawStringLog, LogItemType logItemType);
         LogSummary GenerateLogSummary(string rawStringLogs, LogItemType logItemType);
+        ILogParser GetLogParser(LogItemType logItemType);
     }
 }
