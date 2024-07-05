@@ -17,7 +17,7 @@ namespace LogsAPI.Tests
             _service = new LogFileService();
         }
 
-        [Theory, ClassData(typeof(GenerateLogItemTestData))]
+        [Theory, ClassData(typeof(CreateHttpRequestLogItemTestData))]
         public void GenerateLogItem_Test(
             string input,
             IPAddress expectedIPAddress,
