@@ -1,5 +1,6 @@
 ﻿using LogsAPI.Interfaces.Services;
 using LogsAPI.Models;
+using System;
 using System.Net;
 
 namespace LogsAPI.Services
@@ -19,18 +20,18 @@ namespace LogsAPI.Services
             int port = int.Parse(logElements[9]);
             string userAgentTemp = string.Join(' ', logElements.Skip(11));
             string userAgent = userAgentTemp.Substring(1, userAgentTemp.Length - 2);
-            
-            return new LogItem()
-            {
-                IPAddress = ipAddress,
-                Timestamp = timestamp,
-                HttpMethod = httpMethod,
-                Url = url,
-                HttpProtocol = httpProtocol,
-                HttpResponseStatusCode = httpResponseStatusCode,
-                Port = port,
-                UserAgent = userAgent
-            };
+
+            return new LogItem(
+                ipAddress: ipAddress,
+                timestamp: timestamp,
+                httpMethod: httpMethod,
+                url: url,
+                httpProtocol: httpProtocol,
+                httpResponseStatusCode: httpResponseStatusCode,
+                port: port,
+                userAgent: userAgent,
+                rawStringLog: rawStringLog);
+            ;
         }
     }
 }

@@ -1,37 +1,46 @@
-﻿using System.Net;
+﻿using Microsoft.AspNetCore.Http;
+using System;
+using System.Net;
 
 namespace LogsAPI.Models
 {
     public class LogItem
     {
-        public IPAddress IPAddress { get; set; }
-        public DateTime Timestamp { get; set; }
-        public HttpMethod HttpMethod { get; set; }
-        public string Url { get; set; }
-        public string HttpProtocol { get; set; }
-        public int HttpResponseStatusCode { get; set; }
-        public int Port { get; set; }
+        public LogItem(
+            IPAddress ipAddress,
+            DateTime timestamp,
+            HttpMethod httpMethod,
+            string url,
+            string httpProtocol,
+            int httpResponseStatusCode,
+            int port,
+            string userAgent,
+            string rawStringLog)
+        {
+            IPAddress = ipAddress;
+            Timestamp = timestamp;
+            HttpMethod = httpMethod;
+            Url = url;
+            HttpProtocol = httpProtocol;
+            HttpResponseStatusCode = httpResponseStatusCode;
+            Port = port;
+            UserAgent = userAgent;
+            RawStringLog = rawStringLog;
+        }
 
-        // Can be parsed further if needed
-
-        /// <summary>
-        /// Web browser identification information.
-        /// Can be parsed further if needed.
-        /// (e.g. "Mozilla/5.0 (X11; U; Linux x86_64; fr-FR) AppleWebKit/534.7 (KHTML, like Gecko) Epiphany/2.30.6 Safari/534.7 )"
-        /// 
-        /// Legacy Token: [ Mozilla/5.0 ]
-        /// Operating System and platform information: [ (X11;I;Linux x86_64) ]
-        /// Browser Engine: [ AppleWebKit/534.7 (KHTML, like Gecko)]
-        /// Browser Name and Version: [ Epiphany/2.30.6 ]
-        /// Browser Compatibilities: [ Safari/534/7 ]
-        /// 
-        /// </summary>
-        public string UserAgent { get; set; }
+        public IPAddress IPAddress { get; private set; }
+        public DateTime Timestamp { get; private set; }
+        public HttpMethod HttpMethod { get; private set; }
+        public string Url { get; private set; }
+        public string HttpProtocol { get; private set; }
+        public int HttpResponseStatusCode { get; private set; }
+        public int Port { get; private set; }
+        public string UserAgent { get; private set; }
         
         /// <summary>
         /// Represents the original log record
         /// </summary>
-        public string RawStringLog { get; set; }
+        public string RawStringLog { get; private set; }
         
 
     }

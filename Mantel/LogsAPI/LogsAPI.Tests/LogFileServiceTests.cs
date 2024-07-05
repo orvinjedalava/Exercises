@@ -28,7 +28,8 @@ namespace LogsAPI.Tests
             string expectedHttpProtocol,
             int expectedHttpResponseStatusCode,
             int expectedPort,
-            string expectedUserAgent
+            string expectedUserAgent,
+            string expectedRawStringLog
             )
         {
             LogItem result = _service.GenerateLogItem(input);
@@ -43,6 +44,7 @@ namespace LogsAPI.Tests
                 result.HttpResponseStatusCode.Should().Be(expectedHttpResponseStatusCode);
                 result.Port.Should().Be(expectedPort);
                 result.UserAgent.Should().Be(expectedUserAgent);
+                result.RawStringLog.Should().Be(expectedRawStringLog);
             }
         }
     }
