@@ -2,7 +2,10 @@
 {
     public class LogReport
     {
-        protected IEnumerable<LogItem>? LogItems { get; private set; }
+        public LogReport(string rawStringLogs)
+        {
+            RawStringLogs = rawStringLogs;
+        }
         public string? RawStringLogs { get; private set; }
     }
 }

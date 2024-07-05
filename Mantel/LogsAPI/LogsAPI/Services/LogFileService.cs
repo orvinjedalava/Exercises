@@ -42,7 +42,7 @@ namespace LogsAPI.Services
 
         }
 
-        IEnumerable<LogItem> ILogFileService.CreateLogItems(string rawStringLogs, LogType logType)
+        public IEnumerable<LogItem> CreateLogItems(string rawStringLogs, LogType logType)
         {
             List<string> rawStringLogList = rawStringLogs.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries).ToList();
 
@@ -51,9 +51,11 @@ namespace LogsAPI.Services
 
         public LogReport GenerateLogReport(string rawStringLogs, LogType logType)
         {
+            IEnumerable<LogItem> logItems = CreateLogItems(rawStringLogs, logType);
+
             IReportGenerator reportGenerator = GetReportGenerator(logType);
 
-            throw new NotImplementedException();
+            return reportGenerator.GenerateReport(logItems, rawStringLogs);
             
         }
     }

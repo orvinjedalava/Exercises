@@ -170,15 +170,15 @@ namespace LogsAPI.Tests
                     }
                     result.UniqueIPAddressCount.Should().Be(expectedUniqueIPAddressCount);
 
-                    result.MostVisitedURLs.Count.Should().Be(expectedMostVisitedURLs.Count);
-                    Assert.True(result.MostVisitedURLs[0].Equals(expectedMostVisitedURLs[0]));
-                    Assert.True(result.MostVisitedURLs[1].Equals(expectedMostVisitedURLs[1]));
-                    Assert.True(result.MostVisitedURLs[2].Equals(expectedMostVisitedURLs[2]));
+                    result.MostVisitedURLs.Count().Should().Be(expectedMostVisitedURLs.Count);
+                    Assert.True(result.MostVisitedURLs.ToList()[0].Equals(expectedMostVisitedURLs[0]));
+                    Assert.True(result.MostVisitedURLs.ToList()[1].Equals(expectedMostVisitedURLs[1]));
+                    Assert.True(result.MostVisitedURLs.ToList()[2].Equals(expectedMostVisitedURLs[2]));
 
-                    result.MostActiveIPAddresses.Count.Should().Be(expectedMostActiveIPAddresses.Count);
-                    Assert.True(result.MostActiveIPAddresses[0].Equals(expectedMostActiveIPAddresses[0]));
-                    Assert.True(result.MostActiveIPAddresses[1].Equals(expectedMostActiveIPAddresses[1]));
-                    Assert.True(result.MostActiveIPAddresses[2].Equals(expectedMostActiveIPAddresses[2]));
+                    result.MostActiveIPAddresses.Count().Should().Be(expectedMostActiveIPAddresses.Count);
+                    Assert.True(result.MostActiveIPAddresses.ToList()[0].Equals(expectedMostActiveIPAddresses[0]));
+                    Assert.True(result.MostActiveIPAddresses.ToList()[1].Equals(expectedMostActiveIPAddresses[1]));
+                    Assert.True(result.MostActiveIPAddresses.ToList()[2].Equals(expectedMostActiveIPAddresses[2]));
 
                     break;
                 default:
