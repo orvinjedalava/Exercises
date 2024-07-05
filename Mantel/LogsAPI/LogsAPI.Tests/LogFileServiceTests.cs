@@ -22,7 +22,10 @@ namespace LogsAPI.Tests
         public void GenerateLogItem_Test(
             string input,
             IPAddress expectedIPAddress,
-            DateTime expectedTimestamp
+            DateTime expectedTimestamp,
+            HttpMethod expectedHttpMethod,
+            string expectedUrl,
+            string expectedHttpProtocol
             )
         {
             LogItem result = _service.GenerateLogItem(input);
@@ -30,7 +33,10 @@ namespace LogsAPI.Tests
             using (new AssertionScope())
             {
                 result.IPAddress.Should().Be(expectedIPAddress);
-                //result.Timestamp.Should().Be(expectedTimestamp);
+                result.Timestamp.Should().Be(expectedTimestamp);
+                result.HttpMethod.Should().Be(expectedHttpMethod);
+                result.Url.Should().Be(expectedUrl);
+                result.HttpProtocol.Should().Be(expectedHttpProtocol);
             }
         }
     }

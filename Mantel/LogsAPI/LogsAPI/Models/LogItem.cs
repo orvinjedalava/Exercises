@@ -8,6 +8,7 @@ namespace LogsAPI.Models
         public DateTime Timestamp { get; set; }
         public HttpMethod HttpMethod { get; set; }
         public string Url { get; set; }
+        public string HttpProtocol { get; set; }
         public int StatusCode { get; set; }
         public int Port { get; set; }
 
