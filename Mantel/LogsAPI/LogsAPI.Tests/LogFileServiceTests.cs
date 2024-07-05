@@ -25,7 +25,10 @@ namespace LogsAPI.Tests
             DateTime expectedTimestamp,
             HttpMethod expectedHttpMethod,
             string expectedUrl,
-            string expectedHttpProtocol
+            string expectedHttpProtocol,
+            int expectedHttpResponseStatusCode,
+            int expectedPort,
+            string expectedUserAgent
             )
         {
             LogItem result = _service.GenerateLogItem(input);
@@ -37,6 +40,9 @@ namespace LogsAPI.Tests
                 result.HttpMethod.Should().Be(expectedHttpMethod);
                 result.Url.Should().Be(expectedUrl);
                 result.HttpProtocol.Should().Be(expectedHttpProtocol);
+                result.HttpResponseStatusCode.Should().Be(expectedHttpResponseStatusCode);
+                result.Port.Should().Be(expectedPort);
+                result.UserAgent.Should().Be(expectedUserAgent);
             }
         }
     }

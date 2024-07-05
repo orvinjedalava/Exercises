@@ -9,7 +9,7 @@ namespace LogsAPI.Models
         public HttpMethod HttpMethod { get; set; }
         public string Url { get; set; }
         public string HttpProtocol { get; set; }
-        public int StatusCode { get; set; }
+        public int HttpResponseStatusCode { get; set; }
         public int Port { get; set; }
 
         // Can be parsed further if needed
