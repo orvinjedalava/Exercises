@@ -48,5 +48,8 @@ namespace LogsAPI.Controllers
                     title: "Server error");
             }
         }
+
+        
+
     }
 }
