@@ -5,7 +5,7 @@ VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogsAPI", "LogsAPI\LogsAPI.csproj", "{9AC6098C-2407-4CFC-86EC-1324A5CCEFBE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogsAPI.Tests", "LogsAPI.Tests\LogsAPI.Tests.csproj", "{8AD33C0F-658C-4E90-A766-ED0E05E1F5BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.Tests", "Shared.Tests\Shared.Tests.csproj", "{8AD33C0F-658C-4E90-A766-ED0E05E1F5BF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{E71A9A77-DAAA-49C9-9D8C-29799349924E}"
 EndProject

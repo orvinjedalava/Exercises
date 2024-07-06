@@ -6038,11 +6038,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Jed\\dev\\Exercises\\Mantel\\Demo\\LogsAPI.Tests\\LogsAPI.Tests.csproj",
-      "projectName": "LogsAPI.Tests",
-      "projectPath": "C:\\Jed\\dev\\Exercises\\Mantel\\Demo\\LogsAPI.Tests\\LogsAPI.Tests.csproj",
+      "projectUniqueName": "C:\\Jed\\dev\\Exercises\\Mantel\\Demo\\Shared.Tests\\Shared.Tests.csproj",
+      "projectName": "Shared.Tests",
+      "projectPath": "C:\\Jed\\dev\\Exercises\\Mantel\\Demo\\Shared.Tests\\Shared.Tests.csproj",
       "packagesPath": "C:\\Users\\Jed\\.nuget\\packages\\",
-      "outputPath": "C:\\Jed\\dev\\Exercises\\Mantel\\Demo\\LogsAPI.Tests\\obj\\",
+      "outputPath": "C:\\Jed\\dev\\Exercises\\Mantel\\Demo\\Shared.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

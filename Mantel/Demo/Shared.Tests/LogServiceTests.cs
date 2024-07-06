@@ -14,11 +14,11 @@ using System.Net;
 
 namespace LogsAPI.Tests
 {
-    public class LogFileServiceTests
+    public class LogServiceTests
     {
         private readonly ILogService _service;
 
-        public LogFileServiceTests()
+        public LogServiceTests()
         {
             _service = new LogService();
         }
