@@ -15,6 +15,9 @@ namespace LogsAPI.Controllers
         private readonly IConfiguration _configuration;
         private readonly ILogService _logService;
 
+        private const string LOGS = "Logs";
+        private const string HTTPREQUESTS = "HttpRequests";
+
         public LogReportController(IConfiguration configuration, ILogService logService)
         {
             _configuration = configuration ?? throw new ArgumentNullException(nameof(IConfiguration));
@@ -30,7 +33,7 @@ namespace LogsAPI.Controllers
                     LogType.HttpRequest
                     : Enum.Parse<LogType>(logType);
 
-                string? httpRequestFile = _configuration.GetSection("Logs")?["HttpRequests"]?.ToString();
+                string? httpRequestFile = _configuration.GetSection(LOGS)?[HTTPREQUESTS]?.ToString();
 
                 if (httpRequestFile == null)
                     return NotFound();
