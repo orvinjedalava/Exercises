@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Shared.Entities
 {
+    /// <summary>
+    /// Repor generated for HttpRequest log file.
+    /// </summary>
     public class HttpRequestsLogReport : LogReport
     {
         public HttpRequestsLogReport(

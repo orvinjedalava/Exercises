@@ -15,6 +15,12 @@ namespace Shared.Services
 {
     public class LogService : ILogService
     {
+        /// <summary>
+        /// Get the appropriate ILogParser implementation for the given Enum.LogType
+        /// </summary>
+        /// <param name="logType"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
         public ILogParser GetLogParser(LogType logType)
         {
             switch (logType)
@@ -26,6 +32,12 @@ namespace Shared.Services
             }
         }
 
+        /// <summary>
+        /// Get the appropriate IReportGenerator implementation for the given Enum.LogType
+        /// </summary>
+        /// <param name="logType"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
         public IReportGenerator GetReportGenerator(LogType logType)
         {
             switch (logType)
@@ -37,6 +49,12 @@ namespace Shared.Services
             }
         }
 
+        /// <summary>
+        /// Create a LogItem from a string log entry 
+        /// </summary>
+        /// <param name="rawStringLog"></param>
+        /// <param name="logType"></param>
+        /// <returns></returns>
         public LogItem CreateLogItem(string rawStringLog, LogType logType)
         {
             ILogParser parser = GetLogParser(logType);
@@ -45,6 +63,12 @@ namespace Shared.Services
 
         }
 
+        /// <summary>
+        /// Create a List of LogItem objects from a string of log entries
+        /// </summary>
+        /// <param name="rawStringLogs"></param>
+        /// <param name="logType"></param>
+        /// <returns></returns>
         public IEnumerable<LogItem> CreateLogItems(string rawStringLogs, LogType logType)
         {
             List<string> rawStringLogList = rawStringLogs.Split(new string[] { Environment.NewLine, "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
@@ -52,6 +76,12 @@ namespace Shared.Services
             return rawStringLogList.Select(log => CreateLogItem(log, logType));
         }
 
+        /// <summary>
+        /// Generate a LogReport from a string of log entries
+        /// </summary>
+        /// <param name="rawStringLogs"></param>
+        /// <param name="logType"></param>
+        /// <returns></returns>
         public LogReport GenerateLogReport(string rawStringLogs, LogType logType)
         {
             IEnumerable<LogItem> logItems = CreateLogItems(rawStringLogs, logType);

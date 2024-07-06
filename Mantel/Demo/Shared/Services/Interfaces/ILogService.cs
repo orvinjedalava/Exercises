@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace Shared.Services.Interfaces
 {
+    /// <summary>
+    /// Contract for Log Service class.
+    /// </summary>
     public interface ILogService
     {
         LogItem CreateLogItem(string rawStringLog, LogType logType);

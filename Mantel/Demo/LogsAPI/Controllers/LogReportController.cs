@@ -24,14 +24,16 @@ namespace LogsAPI.Controllers
             _logService = logService ?? throw new ArgumentNullException(nameof(logService));
         }
 
+        /// <summary>
+        /// Generate the report for the HttpRequest log file provided by Mantel. ( Please see programming-task-example-data.log file )
+        /// </summary>
+        /// <returns>The generated report from file provided by Mantel.</returns>
         [HttpGet("Demo")]
-        public IActionResult GetDemo([FromQuery] string? logType)
+        public IActionResult GetDemo()
         {
             try
             {
-                LogType myLogType = string.IsNullOrWhiteSpace(logType) ?
-                    LogType.HttpRequest
-                    : Enum.Parse<LogType>(logType);
+                LogType logType = LogType.HttpRequest;
 
                 string? httpRequestFile = _configuration.GetSection(LOGS)?[HTTPREQUESTS]?.ToString();
 
@@ -42,7 +44,7 @@ namespace LogsAPI.Controllers
 
                 string text = reader.ReadToEnd();
 
-                LogReport report = _logService.GenerateLogReport(text, myLogType);
+                LogReport report = _logService.GenerateLogReport(text, logType);
 
                 return Ok(report);
             }
@@ -54,8 +56,14 @@ namespace LogsAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Generate the report for the provided file path.
+        /// </summary>
+        /// <param name="filePath">The provided log file path to generate a report from</param>
+        /// <param name="logType">The Enum.LogType value. Defaults to HttpRequest if not provided.</param>
+        /// <returns>The generated report from specified given log file.</returns>
         [HttpGet]
-        public IActionResult Get([FromQuery] string filePath, string? logType )
+        public IActionResult Get([FromQuery] string filePath, [FromQuery] string? logType )
         {
             try
             {

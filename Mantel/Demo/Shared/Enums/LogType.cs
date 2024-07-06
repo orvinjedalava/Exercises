@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace Shared.Enums
 {
+    /// <summary>
+    /// The type of log files the application handles.
+    /// </summary>
     public enum LogType
     {
-        None,
-        HttpRequest
+        None, // default value
+        HttpRequest // type used for the demo
     }
 }

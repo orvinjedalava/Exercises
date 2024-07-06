@@ -4,6 +4,10 @@ using Shared.Services;
 using Shared.Services.Interfaces;
 using System.Text.Json.Nodes;
 
+/// NOTE: Console app will only accept 2 valid inputs.
+/// (1): STOP - stops the application
+/// (2): FilePath of the log file.
+
 Console.WriteLine("Welcome to the demo.");
 
 while (true)

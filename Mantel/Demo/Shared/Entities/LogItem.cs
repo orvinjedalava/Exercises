@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Shared.Entities
 {
+    /// <summary>
+    /// Base class for all Log item classes.
+    /// </summary>
     public abstract class LogItem
     {
         public LogItem(string rawStringLog)

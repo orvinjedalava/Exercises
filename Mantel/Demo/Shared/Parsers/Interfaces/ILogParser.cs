@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Shared.Parsers.Interfaces
 {
+    /// <summary>
+    /// Contract for all Log Parser classes.
+    /// </summary>
     public interface ILogParser
     {
         LogItem Parse(string rawStringLog);

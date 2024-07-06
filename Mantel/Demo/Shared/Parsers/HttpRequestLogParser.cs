@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Shared.Parsers
 {
+    /// <summary>
+    /// Parser used to generate a LogItem object from a given log record.
+    /// </summary>
     public class HttpRequestLogParser : ILogParser
     {
         public LogItem Parse(string rawStringLog)

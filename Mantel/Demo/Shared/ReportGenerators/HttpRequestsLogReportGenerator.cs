@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Shared.ReportGenerators
 {
+    /// <summary>
+    /// Report Generator used to generate a report from HttpRequest log files.
+    /// </summary>
     public class HttpRequestsLogReportGenerator : IReportGenerator
     {
         public LogReport GenerateReport(IEnumerable<LogItem> logItems, string rawStringLogs)
@@ -27,6 +30,13 @@ namespace Shared.ReportGenerators
             return logItems.DistinctBy(item => item?.IPAddress.ToString()).Count();
         }
 
+        /// <summary>
+        /// ASUMPTION: 
+        /// For the demo, we simply return the first 3 hightest Visited URL based on the LINQ result below.
+        /// No special logic yet for visited urls who are tied in 1st, 2nd, or 3rd.
+        /// </summary>
+        /// <param name="logItems"></param>
+        /// <returns></returns>
         private IEnumerable<RankedItem> GetMostVisitedURLs(IEnumerable<HttpRequestLogItem?> logItems)
         {
             List<RankedItem> result = new();
@@ -44,6 +54,13 @@ namespace Shared.ReportGenerators
             return result;
         }
 
+        /// <summary>
+        /// ASSUMPTION:
+        /// For the demo, we simply return the first 3 hightest Active IP addresses based on the LINQ result below.
+        /// No special logic yet for visited urls who are tied in 1st, 2nd, or 3rd.
+        /// </summary>
+        /// <param name="logItems"></param>
+        /// <returns></returns>
         private IEnumerable<RankedItem> MostActiveIPAddresses(IEnumerable<HttpRequestLogItem?> logItems)
         {
             List<RankedItem> result = new();
