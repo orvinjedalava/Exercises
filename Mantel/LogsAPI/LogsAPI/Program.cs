@@ -1,5 +1,5 @@
-using LogsAPI.Services;
-using LogsAPI.Services.Interfaces;
+using Shared.Services;
+using Shared.Services.Interfaces;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<ILogFileService, LogFileService>();
+builder.Services.AddScoped<ILogService, LogService>();
 
 //builder.Services.AddHttpLogging(o => { });
 

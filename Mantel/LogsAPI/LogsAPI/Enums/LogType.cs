@@ -1,8 +1,8 @@
-﻿namespace LogsAPI.Enums
-{
-    public enum LogType
-    {
-        None,
-        HttpRequest
-    }
-}
+﻿//namespace LogsAPI.Enums
+//{
+//    public enum LogType
+//    {
+//        None,
+//        HttpRequest
+//    }
+//}

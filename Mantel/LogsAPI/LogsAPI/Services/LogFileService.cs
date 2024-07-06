@@ -1,62 +1,62 @@
-﻿using LogsAPI.Entities;
-using LogsAPI.Enums;
-using LogsAPI.Parsers;
-using LogsAPI.Parsers.Interfaces;
-using LogsAPI.ReportGenerators;
-using LogsAPI.ReportGenerators.Interfaces;
-using LogsAPI.Services.Interfaces;
-using System;
-using System.Net;
+﻿//using LogsAPI.Entities;
+//using LogsAPI.Enums;
+//using LogsAPI.Parsers;
+//using LogsAPI.Parsers.Interfaces;
+//using LogsAPI.ReportGenerators;
+//using LogsAPI.ReportGenerators.Interfaces;
+//using LogsAPI.Services.Interfaces;
+//using System;
+//using System.Net;
 
-namespace LogsAPI.Services
-{
-    public class LogFileService : ILogFileService
-    {
-        public ILogParser GetLogParser(LogType logType)
-        {
-            switch(logType)
-            {
-                case LogType.HttpRequest:
-                    return new HttpRequestLogParser();
-                default:
-                    throw new NotImplementedException($"No parser implemented for {logType}");
-            }
-        }
+//namespace LogsAPI.Services
+//{
+//    public class LogFileService : ILogFileService
+//    {
+//        public ILogParser GetLogParser(LogType logType)
+//        {
+//            switch(logType)
+//            {
+//                case LogType.HttpRequest:
+//                    return new HttpRequestLogParser();
+//                default:
+//                    throw new NotImplementedException($"No parser implemented for {logType}");
+//            }
+//        }
 
-        public IReportGenerator GetReportGenerator(LogType logType)
-        {
-            switch (logType)
-            {
-                case LogType.HttpRequest:
-                    return new HttpRequestsLogReportGenerator();
-                default:
-                    throw new NotImplementedException($"No report generator implemented for {logType}");
-            }
-        }
+//        public IReportGenerator GetReportGenerator(LogType logType)
+//        {
+//            switch (logType)
+//            {
+//                case LogType.HttpRequest:
+//                    return new HttpRequestsLogReportGenerator();
+//                default:
+//                    throw new NotImplementedException($"No report generator implemented for {logType}");
+//            }
+//        }
 
-        public LogItem CreateLogItem(string rawStringLog, LogType logType)
-        {
-            ILogParser parser = GetLogParser(logType);
+//        public LogItem CreateLogItem(string rawStringLog, LogType logType)
+//        {
+//            ILogParser parser = GetLogParser(logType);
 
-            return parser.Parse(rawStringLog);
+//            return parser.Parse(rawStringLog);
 
-        }
+//        }
 
-        public IEnumerable<LogItem> CreateLogItems(string rawStringLogs, LogType logType)
-        {
-            List<string> rawStringLogList = rawStringLogs.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries).ToList();
+//        public IEnumerable<LogItem> CreateLogItems(string rawStringLogs, LogType logType)
+//        {
+//            List<string> rawStringLogList = rawStringLogs.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries).ToList();
 
-            return rawStringLogList.Select(log => CreateLogItem(log, logType));
-        }
+//            return rawStringLogList.Select(log => CreateLogItem(log, logType));
+//        }
 
-        public LogReport GenerateLogReport(string rawStringLogs, LogType logType)
-        {
-            IEnumerable<LogItem> logItems = CreateLogItems(rawStringLogs, logType);
+//        public LogReport GenerateLogReport(string rawStringLogs, LogType logType)
+//        {
+//            IEnumerable<LogItem> logItems = CreateLogItems(rawStringLogs, logType);
 
-            IReportGenerator reportGenerator = GetReportGenerator(logType);
+//            IReportGenerator reportGenerator = GetReportGenerator(logType);
 
-            return reportGenerator.GenerateReport(logItems, rawStringLogs);
+//            return reportGenerator.GenerateReport(logItems, rawStringLogs);
             
-        }
-    }
-}
+//        }
+//    }
+//}

@@ -1,4 +1,4 @@
-﻿using LogsAPI.Enums;
+﻿using Shared.Enums;
 using System;
 using System.Collections;
 using System.Collections.Generic;

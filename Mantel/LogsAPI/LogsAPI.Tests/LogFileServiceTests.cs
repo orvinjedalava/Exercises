@@ -1,26 +1,26 @@
 using FluentAssertions;
 using FluentAssertions.Execution;
-using LogsAPI.Entities;
-using LogsAPI.Enums;
-using LogsAPI.Parsers;
-using LogsAPI.Parsers.Interfaces;
-using LogsAPI.ReportGenerators;
-using LogsAPI.ReportGenerators.Interfaces;
-using LogsAPI.Services;
-using LogsAPI.Services.Interfaces;
 using LogsAPI.Tests.TestData;
 using Microsoft.AspNetCore.Components;
+using Shared.Entities;
+using Shared.Enums;
+using Shared.Parsers;
+using Shared.Parsers.Interfaces;
+using Shared.ReportGenerators;
+using Shared.ReportGenerators.Interfaces;
+using Shared.Services;
+using Shared.Services.Interfaces;
 using System.Net;
 
 namespace LogsAPI.Tests
 {
     public class LogFileServiceTests
     {
-        private readonly ILogFileService _service;
+        private readonly ILogService _service;
 
         public LogFileServiceTests()
         {
-            _service = new LogFileService();
+            _service = new LogService();
         }
 
         [Theory, ClassData(typeof(CreateLogItemTestData))]

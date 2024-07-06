@@ -31,3 +31,6 @@ C:\Jed\dev\Exercises\Mantel\LogsAPI\LogsAPI\obj\Debug\net8.0\refint\LogsAPI.dll
 C:\Jed\dev\Exercises\Mantel\LogsAPI\LogsAPI\obj\Debug\net8.0\LogsAPI.pdb
 C:\Jed\dev\Exercises\Mantel\LogsAPI\LogsAPI\obj\Debug\net8.0\LogsAPI.genruntimeconfig.cache
 C:\Jed\dev\Exercises\Mantel\LogsAPI\LogsAPI\obj\Debug\net8.0\ref\LogsAPI.dll
+C:\Jed\dev\Exercises\Mantel\LogsAPI\LogsAPI\bin\Debug\net8.0\Logs\HttpRequests\programming-task-example-data.log
+C:\Jed\dev\Exercises\Mantel\LogsAPI\LogsAPI\bin\Debug\net8.0\Shared.dll
+C:\Jed\dev\Exercises\Mantel\LogsAPI\LogsAPI\bin\Debug\net8.0\Shared.pdb

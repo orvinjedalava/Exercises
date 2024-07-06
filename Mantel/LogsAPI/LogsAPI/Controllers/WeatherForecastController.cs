@@ -8,6 +8,8 @@ namespace LogsAPI.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
+        private readonly IConfiguration _configuration;
+
         private static readonly string[] Summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
@@ -15,9 +17,10 @@ namespace LogsAPI.Controllers
 
         private readonly ILogger<WeatherForecastController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IConfiguration configuration)
         {
             _logger = logger;
+            _configuration = configuration ?? throw new ArgumentNullException($"{nameof(IConfiguration)} not initialized.");
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
@@ -34,6 +37,8 @@ namespace LogsAPI.Controllers
             //string httpMethod = HttpContext.Request.Method;
             //string httpRequest = HttpContext.Request.ToString();
             //DateTime timestamp = DateTime.ParseExact("10/Jul/2018:22:21:28 +0200", "dd/MMM/yyyy:HH:mm:ss zzzz", null);
+
+            string? httpRequestFolder = _configuration.GetSection("Logs")?["HttpRequests"]?.ToString();
 
             //Request.Headers["User-Agent"];
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
