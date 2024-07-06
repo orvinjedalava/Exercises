@@ -47,7 +47,7 @@ namespace Shared.Services
 
         public IEnumerable<LogItem> CreateLogItems(string rawStringLogs, LogType logType)
         {
-            List<string> rawStringLogList = rawStringLogs.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries).ToList();
+            List<string> rawStringLogList = rawStringLogs.Split(new string[] { Environment.NewLine, "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
 
             return rawStringLogList.Select(log => CreateLogItem(log, logType));
         }

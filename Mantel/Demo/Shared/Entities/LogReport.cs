@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Shared.Entities
 {
-    public class LogReport
+    public abstract class LogReport
     {
         public LogReport(string rawStringLogs)
         {
