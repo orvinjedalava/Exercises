@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing.Constraints;
 using Shared.Entities;
 using Shared.Enums;
 using Shared.Services.Interfaces;
+using System.IO;
 
 namespace LogsAPI.Controllers
 {
@@ -20,7 +22,7 @@ namespace LogsAPI.Controllers
         }
 
         [HttpGet("Demo")]
-        public IActionResult Get([FromQuery] string? logType)
+        public IActionResult GetDemo([FromQuery] string? logType)
         {
             try
             {
@@ -49,7 +51,32 @@ namespace LogsAPI.Controllers
             }
         }
 
-        
+        [HttpGet]
+        public IActionResult Get([FromQuery] string filePath, string? logType )
+        {
+            try
+            {
+                LogType myLogType = string.IsNullOrWhiteSpace(logType) ?
+                    LogType.HttpRequest
+                    : Enum.Parse<LogType>(logType);
 
+                if (!System.IO.File.Exists(filePath))
+                    return NotFound();
+                
+                using StreamReader reader = new StreamReader(filePath);
+
+                string text = reader.ReadToEnd();
+
+                LogReport report = _logService.GenerateLogReport(text, myLogType);
+
+                return Ok(report);
+            }
+            catch (Exception ex)
+            {
+                return Problem(
+                    detail: ex.Message,
+                    title: "Server error");
+            }
+        }
     }
 }
