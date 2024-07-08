@@ -782,5 +782,11 @@ namespace CodilityNET
         }
 
         #endregion
+
+        public void Playground()
+        {
+            char[] arry = new char[] { '1', '2' };
+            Console.WriteLine(arry.ToString());
+        }
     }
 }

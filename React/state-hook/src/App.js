@@ -5,11 +5,17 @@ import HookCounter from './components/HookCounter.js';
 import HookCounterTwo from './components/HookCounterTwo.js';
 import HookCounterThree from './components/HookCounterThree.js';
 import ClassCounterThreeJed from './components/ClassCounterThreeJed.js';
+import HookCounterFour from './components/HookCounterFour.js';
+import ClassCounterFour from './components/ClassCounterFour.js';
+import EffectClassCounterOne from './components/EffectClassCounterOne.js';
 
 function App() {
   return (
     <div className="App">
-      <ClassCounterThreeJed />
+      <EffectClassCounterOne/>
+      {/*<ClassCounterFour/>*/}
+      {/*<HookCounterFour/>*/}
+      {/*<ClassCounterThreeJed />*/}
       {/*<HookCounterThree/>*/}
       {/*<HookCounterTwo />*/}
       {/*<HookCounter />*/}
