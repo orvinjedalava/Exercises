@@ -3,14 +3,24 @@ import { checkSchema, validationResult, matchedData } from 'express-validator';
 import { createQueryValidationSchema, createUserValidationSchema } from '../utils/validationSchemas.mjs';
 import { mockUsers } from '../utils/constants.mjs';
 import { resolveUserIndex } from '../utils/middlewares.mjs'; 
+import session from 'express-session';
 
 const router = Router();
 
 router.get('/api/users',
     checkSchema(createQueryValidationSchema, ['query']),
     (request, response) => {
+        //console.log(request.session);
+        console.log(request.session.id);
+        request.sessionStore.get(request.session.id, (err, sessionData) => {
+            if (err) {
+                console.log(err);
+                throw err;
+            }
+            console.log(sessionData);
+        });
         const result = validationResult(request);
-        console.log(result);
+        //console.log(result);
         
         if (!result.isEmpty())
             return response.status(400).send({errors: result.array()});
