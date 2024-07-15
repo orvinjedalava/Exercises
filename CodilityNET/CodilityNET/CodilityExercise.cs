@@ -710,6 +710,53 @@ namespace CodilityNET
 
         #endregion
 
+        #region MinAbsSum
+
+        public int MinAbsSum(int[] input)
+        {
+            int sum = 0;
+            for(int i = 0; i< input.Length; i++)
+            {
+                sum += Math.Abs(input[i]);
+            }
+
+            float center = sum / 2f;
+            int range = (int)Math.Floor(center);
+
+            int[] r = new int[range + 1];
+            r[0] = 1;
+
+            foreach(int i in input)
+            {
+                for (int j = r.Length - 1; j >= 0; j--)
+                {
+                    if (j - Math.Abs(i) >= 0)
+                    {
+                        if (r[j - Math.Abs(i)] == 1)
+                        {
+                            r[j] = 1;
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+
+            for(int i = range; i >= 0; i--)
+            {
+                if (r[i] == 1)
+                {
+                    return (int)((center - i) * 2);
+                }
+            }
+
+            return -1;
+        }
+
+        #endregion
+
         //#region MinMaxDivision
 
         //public int MinMaxDivision(int K, int M, int[] A)

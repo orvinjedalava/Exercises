@@ -258,6 +258,16 @@ namespace TestProject1
             Assert.Equal(expectedResult, result);
         }
 
+        [Theory]
+        [InlineData(new int[] { 1, 5, 2, -2 }, 0)]
+        [InlineData(new int[] { 2, 5, 1, -2 }, 0)]
+        public void MinAbsSum(int[] input, int expectedResult)
+        {
+            int result = _exercise.MinAbsSum(input);
+
+            Assert.Equal(expectedResult, result);
+        }
+
 
         //[Theory]
         //[InlineData(3, 5, new int[] { 2,1,5,1,2,2,2}, 6)]
