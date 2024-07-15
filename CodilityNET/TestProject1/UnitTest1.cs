@@ -4,12 +4,12 @@ namespace TestProject1
 {
     public class UnitTest1
     {
-        CodilityExercise _exercise = new ();
+        CodilityExercise _exercise = new();
 
         [Theory]
         [InlineData("3", 10, 2, "11")]
         [InlineData("4", 10, 2, "100")]
-        [InlineData("5", 10,2,"101")]
+        [InlineData("5", 10, 2, "101")]
         [InlineData("1041", 10, 2, "10000010001")]
         [InlineData("100", 10, 16, "64")]
         [InlineData("15", 10, 16, "F")]
@@ -23,9 +23,9 @@ namespace TestProject1
         }
 
         [Theory]
-        [InlineData(3,0)]
-        [InlineData(4,0)]
-        [InlineData(5,1)]
+        [InlineData(3, 0)]
+        [InlineData(4, 0)]
+        [InlineData(5, 1)]
         [InlineData(1041, 5)]
         [InlineData(32, 0)]
         [InlineData(3125, 4)]
@@ -37,9 +37,9 @@ namespace TestProject1
         }
 
         [Theory]
-        [InlineData("3","11")]
-        [InlineData("4","100")]
-        
+        [InlineData("3", "11")]
+        [InlineData("4", "100")]
+
         public void DecimalToBinary_Test(string input, string expectedResult)
         {
             string result = HelperService.DecimalToBinary(input);
@@ -49,23 +49,23 @@ namespace TestProject1
 
         [Theory]
         [InlineData(new int[] { 3, 8, 9, 7, 6 }, 1, new int[] { 6, 3, 8, 9, 7 })]
-        [InlineData(new int[] { 6 },10, new int[] { 6 })]
-        [InlineData(new int[] { 3, 8, 9, 7, 6}, 3, new int[] { 9, 7, 6, 3, 8})]
-        [InlineData(new int[] { 0, 0, 0}, 1, new int[] { 0, 0, 0})]
-        [InlineData(new int[] { 1, 2, 3, 4}, 4, new int[] { 1, 2, 3, 4})]
+        [InlineData(new int[] { 6 }, 10, new int[] { 6 })]
+        [InlineData(new int[] { 3, 8, 9, 7, 6 }, 3, new int[] { 9, 7, 6, 3, 8 })]
+        [InlineData(new int[] { 0, 0, 0 }, 1, new int[] { 0, 0, 0 })]
+        [InlineData(new int[] { 1, 2, 3, 4 }, 4, new int[] { 1, 2, 3, 4 })]
         [InlineData(new int[] { }, 5, new int[] { })]
         public void CyclicRotation_Test(int[] input, int rotationCount, int[] expectedResult)
         {
             int[] result = _exercise.CyclicRotation(input, rotationCount);
 
-            for(int i = 0; i < result.Length; i++)
+            for (int i = 0; i < result.Length; i++)
             {
                 Assert.Equal(expectedResult[i], result[i]);
             }
         }
 
         [Theory]
-        [InlineData(new int[] { 9, 3, 9, 3, 9, 7, 9}, 7)]
+        [InlineData(new int[] { 9, 3, 9, 3, 9, 7, 9 }, 7)]
         [InlineData(new int[] { 1 }, 1)]
         [InlineData(new int[] { 5, 2, 2, 2, 2 }, 5)]
         [InlineData(new int[] { 6, 2, 4, 4, 6 }, 2)]
@@ -88,8 +88,8 @@ namespace TestProject1
         }
 
         [Theory]
-        [InlineData(new int[] { 2, 3, 1, 5}, 4)]
-        [InlineData(new int[] { 10,7,3,4,6,5,2,8,1 }, 9)]
+        [InlineData(new int[] { 2, 3, 1, 5 }, 4)]
+        [InlineData(new int[] { 10, 7, 3, 4, 6, 5, 2, 8, 1 }, 9)]
         [InlineData(new int[] { }, 1)]
         [InlineData(new int[] { 2 }, 1)]
         [InlineData(new int[] { 1, 2, 3 }, 4)]
@@ -100,8 +100,8 @@ namespace TestProject1
             Assert.Equal(expectedResult, result);
         }
         [Theory]
-        [InlineData(new int[] { 5,3}, 2)]
-        [InlineData(new int[] { 3, 1, 2, 4, 3}, 1)]
+        [InlineData(new int[] { 5, 3 }, 2)]
+        [InlineData(new int[] { 3, 1, 2, 4, 3 }, 1)]
         [InlineData(new int[] { 6, 2, 2 }, 2)]
         public void TapeEquilibrium_Test(int[] input, int expectedResult)
         {
@@ -111,7 +111,7 @@ namespace TestProject1
         }
 
         [Theory]
-        [InlineData(new int[] { 3, 5, 3, 10, 11, 2, 1, 1,  }, 3,  6)]
+        [InlineData(new int[] { 3, 5, 3, 10, 11, 2, 1, 1, }, 3, 6)]
         [InlineData(new int[] { 3, 1, 2, 4, 3 }, 10, -1)]
         [InlineData(new int[] { 1, 3, 1, 4, 2, 3, 5, 4 }, 5, 6)]
         public void FrogRiverOne_Test(int[] input, int destination, int expectedResult)
@@ -122,7 +122,7 @@ namespace TestProject1
         }
 
         [Theory]
-        [InlineData(new int[] { 1, 3, 2 , 5, 4 }, 1)]
+        [InlineData(new int[] { 1, 3, 2, 5, 4 }, 1)]
         [InlineData(new int[] { 3, 1, 2, 4, 3 }, 0)]
         [InlineData(new int[] { 4, 1, 3 }, 0)]
         public void PermCheck_Test(int[] input, int expectedResult)
@@ -165,7 +165,7 @@ namespace TestProject1
         }
 
         [Theory]
-        [InlineData(6,11,2,3)]
+        [InlineData(6, 11, 2, 3)]
         [InlineData(6, 12, 2, 4)]
         public void CountDiv_Test(int a, int b, int k, int expectedResult)
         {
@@ -176,7 +176,7 @@ namespace TestProject1
 
         [Theory]
         [InlineData(new int[] { 1, 4, -3 }, 1)]
-        [InlineData(new int[] { -8, 4, 5, -10, 3}, 3)]
+        [InlineData(new int[] { -8, 4, 5, -10, 3 }, 3)]
         [InlineData(new int[] { 6 }, 12)]
         [InlineData(new int[] { 8, 5, 3, 4, 6, 8 }, 6)]
         [InlineData(new int[] { 3, 4, 5, 6, 8, 8 }, 6)]
@@ -184,14 +184,14 @@ namespace TestProject1
         public void MinAbsSumOfTwo_Test(int[] input, int expectedResult)
         {
             int result = _exercise.MinAbsSumOfTwo(input);
-            
+
             Assert.Equal(expectedResult, result);
         }
 
         [Theory]
         [InlineData(new int[] { 1, 1, 1 }, 2)]
         [InlineData(new int[] { 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0 }, 3)]
-        [InlineData(new int[] { 0, 0, 0, 0, 0, 1, 1  }, 1)]
+        [InlineData(new int[] { 0, 0, 0, 0, 0, 1, 1 }, 1)]
         [InlineData(new int[] { 0, 0, 0, 0, 0, 1 }, -1)]
         public void FibFrog_Test(int[] input, int expectedResult)
         {
@@ -249,6 +249,16 @@ namespace TestProject1
             Assert.Equal(expectedResult, result);
         }
 
+        [Theory]
+        [InlineData(3, 4, new int[] { 2, 1, 5, 1, 2, 2, 2 }, 6)]
+        public void MinMaxDivision_Test(int k, int m, int[] input, int expectedResult)
+        {
+            int result = _exercise.MinMaxDivision(k, m, input);
+
+            Assert.Equal(expectedResult, result);
+        }
+
+
         //[Theory]
         //[InlineData(3, 5, new int[] { 2,1,5,1,2,2,2}, 6)]
         //public void MinMaxDivision_Test(int size, int max, int[] input, int expectedResult)
@@ -258,7 +268,7 @@ namespace TestProject1
         //    Assert.Equal(expectedResult, result);
         //}
 
-        [Fact]
+        //[Fact]
         //[InlineData(new int[] { 1, 2, 3, 4, 1, 1, 3 }, 4,  3)]
         //[InlineData(new int[] { }, 4, 0)]
         //[InlineData(new int[] { 4}, 4, 1)]
@@ -268,11 +278,11 @@ namespace TestProject1
         //[InlineData(new int[] { 3, 5, 2 }, 5, 1)]
         //[InlineData(new int[] { 2, 2, 5 }, 5, 1)]
         //[InlineData(new int[] { 1, 1, 4, 1, 1 }, 5, 1)]
-        public void TieRopes_Test()
-        {
-            _exercise.Playground();
+        //public void TieRopes_Test()
+        //{
+        //    _exercise.Playground();
 
-            //Assert.Equal(expectedResult, result);
-        }
+        //    //Assert.Equal(expectedResult, result);
+        //}
     }
 }
