@@ -8,10 +8,20 @@ import MouseContainer from './components/MouseContainer.js';
 import IntervalClassCounter from './components/IntervalClassCounter.js';
 import IntervalHookCounter from './components/IntervalHookCounter.js';
 import DataFetching from './components/DataFetching.js';
+import ComponentC from './components/ComponentC.js';
+import React from 'react';
+
+export const UserContext = React.createContext();
+export const ChannelContext = React.createContext();
 
 function App() {
   return (
     <div className="App">
+      <UserContext.Provider value={'Jed'}>
+        <ChannelContext.Provider value={'Codevolution'}>
+          <ComponentC/>
+        </ChannelContext.Provider>
+      </UserContext.Provider>
       {/*<ClassCounterOne />*/}
       {/*<HookCounterOne />*/}
       {/*<ClassMouse />*/}
@@ -19,7 +29,7 @@ function App() {
       {/*<MouseContainer/>*/}
       {/*<IntervalClassCounter />*/}
       {/*<IntervalHookCounter />*/}
-      <DataFetching/>
+      {/*<DataFetching/>*/}
     </div>
   );
 }
