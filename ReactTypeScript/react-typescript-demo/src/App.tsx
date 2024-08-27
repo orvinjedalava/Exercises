@@ -12,6 +12,7 @@ import { Input } from './components/Input';
 import { Container } from './components/Container';
 import { LoggedIn } from './components/state/LoggedIn';
 import { User } from './components/state/User';
+import { UserTypeAssertion } from './components/state/UserTypeAsssertion';
 
 function App() {
   // const personName = {
@@ -56,6 +57,7 @@ function App() {
         {/* <Container styles={{border: '1px solid black', padding: '1rem'}}/> */}
         <LoggedIn />
         <User />
+        <UserTypeAssertion/>
     </div>
   );
 }
