@@ -11,11 +11,13 @@ import { Button } from './components/Button';
 import { Input } from './components/Input';
 import { Container } from './components/Container';
 import { LoggedIn } from './components/state/LoggedIn';
-import { User } from './components/state/User';
-import { UserTypeAssertion } from './components/state/UserTypeAsssertion';
+// import { User } from './components/state/User';
+// import { UserTypeAssertion } from './components/state/UserTypeAsssertion';
 import { Counter } from './components/reducer/Counter';
 import { ThemeContextProvider } from './components/context/ThemeContext';
 import { Box } from './components/context/Box';
+import { UserContext, UserContextProvider } from './components/context/UserContext';
+import { User } from './components/context/User';
 
 function App() {
   // const personName = {
@@ -67,6 +69,10 @@ function App() {
       <ThemeContextProvider>
         <Box />
       </ThemeContextProvider>
+
+      <UserContextProvider>
+        <User />
+      </UserContextProvider>
     </div>
   );
 }
