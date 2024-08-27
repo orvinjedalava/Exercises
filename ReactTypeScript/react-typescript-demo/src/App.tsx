@@ -14,6 +14,8 @@ import { LoggedIn } from './components/state/LoggedIn';
 import { User } from './components/state/User';
 import { UserTypeAssertion } from './components/state/UserTypeAsssertion';
 import { Counter } from './components/reducer/Counter';
+import { ThemeContextProvider } from './components/context/ThemeContext';
+import { Box } from './components/context/Box';
 
 function App() {
   // const personName = {
@@ -39,28 +41,32 @@ function App() {
 
   return (
     <div className="App">
-        {/* <Greet name='Jed' messageCount={20} isLoggedIn={false} />
-        <Person name={personName}/>
-        <PersonList names={nameList}/> */}
-        {/* <Status status='loading'/>
-        <Heading>Placeholder text</Heading>
-        <Oscar>
-          <Heading>Oscar goes to Leonardo Dicaprio</Heading>
-        </Oscar>
-        <Greet name='Jed' isLoggedIn={true} /> */}
-        {/* <Button handleClick={(event, id) => {
-          console.log('Button clicked', event, id)
-        }}/>
-        <Input value={value} handleChange={(event) => {
-          console.log(event.target.value)
-          setValue(event.target.value)
-        }}/> */}
-        {/* <Container styles={{border: '1px solid black', padding: '1rem'}}/> */}
-        {/* <LoggedIn />
-        <User />
-        <UserTypeAssertion/> */
-        <Counter />
-        }
+      {/* <Greet name='Jed' messageCount={20} isLoggedIn={false} />
+      <Person name={personName}/>
+      <PersonList names={nameList}/> */}
+      {/* <Status status='loading'/>
+      <Heading>Placeholder text</Heading>
+      <Oscar>
+        <Heading>Oscar goes to Leonardo Dicaprio</Heading>
+      </Oscar>
+      <Greet name='Jed' isLoggedIn={true} /> */}
+      {/* <Button handleClick={(event, id) => {
+        console.log('Button clicked', event, id)
+      }}/>
+      <Input value={value} handleChange={(event) => {
+        console.log(event.target.value)
+        setValue(event.target.value)
+      }}/> */}
+      {/* <Container styles={{border: '1px solid black', padding: '1rem'}}/> */}
+      {/* <LoggedIn />
+      <User />
+      <UserTypeAssertion/> */
+      // <Counter />
+      }
+
+      <ThemeContextProvider>
+        <Box />
+      </ThemeContextProvider>
     </div>
   );
 }
