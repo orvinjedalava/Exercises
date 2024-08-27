@@ -13,6 +13,7 @@ import { Container } from './components/Container';
 import { LoggedIn } from './components/state/LoggedIn';
 import { User } from './components/state/User';
 import { UserTypeAssertion } from './components/state/UserTypeAsssertion';
+import { Counter } from './components/reducer/Counter';
 
 function App() {
   // const personName = {
@@ -55,9 +56,11 @@ function App() {
           setValue(event.target.value)
         }}/> */}
         {/* <Container styles={{border: '1px solid black', padding: '1rem'}}/> */}
-        <LoggedIn />
+        {/* <LoggedIn />
         <User />
-        <UserTypeAssertion/>
+        <UserTypeAssertion/> */
+        <Counter />
+        }
     </div>
   );
 }
