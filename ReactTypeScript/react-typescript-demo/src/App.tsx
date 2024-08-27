@@ -25,6 +25,7 @@ import { Login } from './components/auth/Login';
 import { Profile } from './components/auth/Profile';
 import { Private } from './components/auth/Private';
 import { List } from './components/generics/List';
+import { RandomNumber } from './components/restriction/RandomNumber';
 
 function App() {
   // const personName = {
@@ -89,7 +90,7 @@ function App() {
       {/* <Private isLoggedIn={true} component={Profile}/>
       <Private isLoggedIn={false} component={Profile}/> */}
 
-      <List 
+      {/* <List 
         items={['Batman', 'Superman', 'Wonder Woman' ]} 
         onClick={(item) => {
           console.log(item)}}
@@ -101,7 +102,7 @@ function App() {
           console.log(item)}}
       />
 
-<List 
+      <List 
         items={[
           {
             first: 'Bruce',
@@ -118,7 +119,8 @@ function App() {
         ]} 
         onClick={(item) => {
           console.log(item)}}
-      />
+      /> */}
+      <RandomNumber value={10} isPositive/>
 
     </div>
   );
