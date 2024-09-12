@@ -1,0 +1,20 @@
+{
+    "data": [
+      {
+        "title": "Top of the mountain",
+        "url": "./images/img1.jpeg"
+      },
+      {
+        "title": "Blue bird",
+        "url": "./images/img2.jpeg"
+      },
+      {
+        "title": "Allergy conduit",
+        "url": "./images/img3.jpeg"
+      },
+      {
+        "title": "Red umbrella",
+        "url": "./images/img4.jpeg"
+      }
+    ]
+  }
